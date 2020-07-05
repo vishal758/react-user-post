@@ -1,0 +1,73 @@
+input[type=text], select{
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    margin: 15px 0 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2em;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  label {
+    color: white;
+  }
+
+
+  textarea {
+    width: 100%;
+    margin: 15px 0 15px 0;
+    height: 150px;
+    padding: 12px 20px;
+    font-size: 1.5em;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    resize: vertical;
+  }
+  
+  .Center {
+    /* margin-top: auto; */
+    text-align: center;
+  }
+
+  .Container {
+    margin: auto;
+    border-radius: 5px;
+    background-color: #3f3b3b;
+    border-radius: 5%;
+    padding: 20px;
+    width: 70%;
+    height: 380px;
+  }
+
+  button {
+    width: 100%;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background-color: #fb0909;
+  }
+  
+  .Print {
+    width: 100%;
+    margin: 20px 0 40px 0;
+    /* margin: 20px 20px 40px; */
+  }
+
+  @media (min-width: 600px) {
+    .Container {
+      width: 60%;
+    }
+  }
+
