@@ -1,41 +1,8 @@
-/* .Post {
-    width: 200px;
-    padding: 16px;
-    text-align: center;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 3px #ccc;
-    margin: 10px;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.Post:hover,
-.Post:active {
-    background-color: #C0DDF5;
-}
-
-.Author {
-    margin: 16px 0;
-    color: #ccc;
-} */
-
-
-
-
-/* 
-* {
-    box-sizing: border-box;
-} */
-.Container {
-    box-sizing: border-box;
-    background: #f1f1f1;
-    margin: 2rem;
-}
-.Blog-card {
+.BlogCard {
     display: flex;
     flex-direction: column;
     margin: 1rem auto;
-    box-shadow: 0 3px 7px -1px #000000;
+    box-shadow: 0 3px 7px -1px rgba(0, 0, 0, .1);
     margin-bottom: 1.6%;
     background: #fff;
     line-height: 1.4;
@@ -44,21 +11,21 @@
     overflow: hidden;
     z-index: 0;
 }
-.Blog-card a {
+.BlogCard a {
     color: inherit;
 }
-.Blog-card a:hover {
+.BlogCard a:hover {
     color: #5ad67d;
 }
-.Blog-card:hover .Photo {
+.BlogCard:hover .Photo {
     transform: scale(1.3) rotate(3deg);
 }
-.Blog-card .Meta {
+.BlogCard .Meta {
     position: relative;
     z-index: 0;
     height: 200px;
 }
-.Blog-card .Photo {
+.BlogCard .Photo {
     position: absolute;
     top: 0;
     right: 0;
@@ -66,102 +33,102 @@
     left: 0;
     background-size: cover;
     background-position: center;
-    transition: transform .2s;
+    transition: transform 0.2s;
 }
-.Blog-card .Details, .Blog-card .Details ul {
+/* .BlogCard .Details, .BlogCard .Details ul {
     margin: auto;
     padding: 0;
     list-style: none;
-}
-.Blog-card .Details {
-    position: absolute;
+} */
+/* .BlogCard .Details {
+    position: fixed;
     top: 0;
     bottom: 0;
     left: -100%;
     margin: auto;
-    transition: left .2s;
-    background: #000100;
+    transition: left 0.2s;
+    background: rgba(0, 0, 0, .6);
     color: #fff;
     padding: 10px;
     width: 100%;
-    font-size: .9rem;
-}
-.Blog-card .Details a {
+    font-size: 0.9rem;
+} */
+/* .BlogCard .Details a {
     text-decoration: dotted underline;
-}
-.Blog-card .Details ul li {
+} */
+/* .BlogCard .Details ul li {
     display: inline-block;
-}
-.Blog-card .Details .Author:before {
-    font-family: FontAwesome;
+} */
+/* .BlogCard .Details .Author:before {
+    font-family: sans-serif;
     margin-right: 10px;
     content: "\f007";
 }
-.Blog-card .Details .Date:before {
-    font-family: FontAwesome;
+.BlogCard .Details .Date:before {
+    font-family: sans-serif;
     margin-right: 10px;
     content: "\f133";
 }
-.Blog-card .Details .Tags ul:before {
-    font-family: FontAwesome;
+.BlogCard .Details .Tags ul:before {
+    font-family: sans-serif;
     content: "\f02b";
     margin-right: 10px;
-}
-.Blog-card .Details .Tags li {
+} */
+/* .BlogCard .Details .Tags li {
     margin-right: 2px;
 }
-.Blog-card .Details .Tags li:first-child {
+.BlogCard .Details .Tags li:first-child {
     margin-left: -4px;
-}
-.Blog-card .Description {
+} */
+.BlogCard .Description {
     padding: 1rem;
     background: #fff;
     position: relative;
     z-index: 1;
 }
-.Blog-card .Description h1, .Blog-card .Description h2 {
-    font-family: Poppins, sans-serif;
+.BlogCard .Description h1, .BlogCard .Description h2 {
+    font-family: sans-serif;
 }
-.Blog-card .Description h1 {
+.BlogCard .Description h1 {
     line-height: 1;
     margin: 0;
     font-size: 1.7rem;
 }
-.Blog-card .Description h2 {
+.BlogCard .Description h2 {
     font-size: 1rem;
     font-weight: 300;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     color: #a2a2a2;
     margin-top: 5px;
 }
-.Blog-card .Description .Read-more {
+.BlogCard .Description .ReadMore {
     text-align: right;
 }
-.Blog-card .Description .Read-more a {
+.BlogCard .Description .ReadMore a {
     color: #5ad67d;
-    display: inline-block;
-    position: relative;
+    /* display: inline-block; */
+    /* position: relative; */
 }
-.Blog-card .Description .Read-more a:after {
+/* .BlogCard .Description .ReadMore a:after {
     content: "\f061";
-    font-family: FontAwesome;
-    margin-left: -10px;
+    font-family: sans-serif;
+    margin-left: -20px;
     opacity: 0;
     vertical-align: middle;
-    transition: margin .3s, opacity .3s;
-}
-.Blog-card .Description .Read-more a:hover:after {
+    transition: margin 0.3s, opacity 0.3s;
+} */
+/* .BlogCard .Description .ReadMore a:hover:after {
     margin-left: 5px;
     opacity: 1;
-}
-.Blog-card p {
+} */
+.BlogCard p {
     position: relative;
     margin: 1rem 0 0;
 }
-.Blog-card p:first-of-type {
+.BlogCard p:first-of-type {
     margin-top: 1.25rem;
 }
-.Blog-card p:first-of-type:before {
+.BlogCard p:first-of-type:before {
     content: "";
     position: absolute;
     height: 5px;
@@ -170,22 +137,23 @@
     top: -0.75rem;
     border-radius: 3px;
 }
-.Blog-card:hover .Details {
+/* .BlogCard:hover .Details {
     left: 0%;
-}
+    opacity: 0.3%;
+} */
 @media (min-width: 640px) {
-    .Blog-card {
+    .BlogCard {
         flex-direction: row;
         max-width: 700px;
    }
-    .Blog-card .Meta {
+    .BlogCard .Meta {
         flex-basis: 40%;
         height: auto;
    }
-    .Blog-card .Description {
+    .BlogCard .Description {
         flex-basis: 60%;
    }
-    .Blog-card .Description:before {
+    .BlogCard .Description:before {
         transform: skewX(-3deg);
         content: "";
         background: #fff;
@@ -196,15 +164,15 @@
         bottom: 0;
         z-index: -1;
    }
-    .Blog-card.alt {
+    .BlogCard.alt {
         flex-direction: row-reverse;
    }
-    .Blog-card.alt .Description:before {
+    .BlogCard.alt .Description:before {
         left: inherit;
         right: -10px;
         transform: skew(3deg);
    }
-    .Blog-card.alt .Details {
+    .BlogCard.alt .Details {
         padding-left: 25px;
    }
 }

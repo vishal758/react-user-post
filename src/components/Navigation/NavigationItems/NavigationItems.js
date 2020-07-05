@@ -5,9 +5,9 @@ import NavigationItem from './NavigationItem/NavigationItem'
 const NavigationItems = props => {
     return (
         <ul className={classes.NavigationItems}>
-            <NavigationItem link="/" active> UserPost </NavigationItem>
-            <NavigationItem link="/"> AllPosts </NavigationItem>
-            <NavigationItem link="/"> Users </NavigationItem>
+            <NavigationItem link="/newPost" > New Post </NavigationItem>
+            <NavigationItem link="/allPosts" > AllPosts </NavigationItem>
+            <NavigationItem link="/users"> Users </NavigationItem>
         </ul>
     )
 }

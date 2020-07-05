@@ -5,7 +5,7 @@ const instance = axios.create({
 })
 
 instance.defaults.headers.common['Content-Type'] = 'application/json'
-instance.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 instance.defaults.headers.common['Access-Control-Allow-Credentials'] = 'true'
 instance.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept'
 instance.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE'

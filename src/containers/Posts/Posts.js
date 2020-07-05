@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import axios from '../../axios-post'
 import Post from '../../components/Post/Post'
+import classes from "./Posts.module.css";
 class Posts extends Component {
     state = {
         posts: []
     }
 
     componentDidMount () {
+        console.log("posts")
         axios.get("/allPosts")
         .then(response => {
             console.log(response.data)
@@ -36,15 +38,17 @@ class Posts extends Component {
                             key = {post.id}
                             title = {post.title}
                             author = {post.author}
-                            desc = {post.description}
+                            desc = {post.desc}
                         />
                 }
             )
         }
         return (
-            <section>
+            <section className={classes.Posts}>
                 {posts}
             </section>
         )
     }
 }
+
+export default Posts

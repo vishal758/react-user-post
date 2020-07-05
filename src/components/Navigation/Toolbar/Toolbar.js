@@ -6,7 +6,7 @@ import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle'
 import { Route, Link } from 'react-router-dom'
 import Posts from '../../../containers/Posts/Posts'
 import NewPost from '../../../containers/NewPost/NewPost'
-
+import Aux from '../../../hoc/Aux/Aux'
 const Toolbar = props => {
     return (
         <Aux>
@@ -20,7 +20,8 @@ const Toolbar = props => {
                 </nav>
             </header>
             <Route path="/" exact component={Posts} />
-            <Route path="/new-post" component = {NewPost}/>
+            <Route path="/allPosts" component={Posts} />
+            <Route path="/newPost" component = {NewPost}/>
         </Aux>
 
 
