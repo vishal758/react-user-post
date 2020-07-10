@@ -3,6 +3,7 @@ import React from 'react';
 import './Post.module.css';
 import classes from './Post.module.css'
 import img from '../../assets/images/img.jpg'
+import { Link } from 'react-router-dom'
 const post = (props) => {
     // <article className="Post" onClick={props.clicked}>
     //     <h1>{props.title}</h1>
@@ -13,7 +14,7 @@ const post = (props) => {
     // <div className={classes.Photo} style={{backgroundImage: `url("https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg")`}}></div>
 
     return (
-        <article >
+        <article>
                 <div className={classes.BlogCard}>
                     <div className={classes.Meta}>
                         <div className={classes.Photo} style={{backgroundImage: "url(" + img +")"}}></div>
@@ -34,8 +35,10 @@ const post = (props) => {
                     <h1>{props.title}</h1>
                     <h2>Author: {props.author}</h2>
                         <p> {props.desc}</p>
-                    <p className={classes.ReadMore}>
-                        <a href="#">Read More</a>
+                    <p>{props.lastModifiedDate}</p>
+                    <p className={classes.ReadMore}  onClick={props.clicked}>
+                        {/* Read More */}
+                        <Link to ="">Read More</Link>
                     </p>
                     </div>
                 </div>

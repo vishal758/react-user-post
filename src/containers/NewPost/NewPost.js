@@ -7,7 +7,7 @@ class NewPost extends Component {
     state = {
         post: {
             title: '',
-            description: ''
+            desc: ''
         },
         submittable: false,
         submitting: false
@@ -22,7 +22,7 @@ class NewPost extends Component {
         Post.title = val
         
         if(name === 'description')
-        Post.description = val
+        Post.desc = val
 
         this.setState({post: Post})
 
@@ -42,14 +42,16 @@ class NewPost extends Component {
 
     submitClicked = () => {
         this.setState({submitting: true})
-        axios.post('/users/ptyagi/posts', this.state.post)
+        const post = this.state.post
+        axios.post('/users/ptyagi/posts', post)
+        // axios.post('https://burger-react-app-50038.firebaseio.com/post.json', post)
         .then(response => {
             console.log(response.data)
         })
         .catch(error => {
             console.log(error)
         })
-        alert("Post submitted")
+        // alert("Post submitted")
     }
     render() {
 
@@ -88,7 +90,7 @@ class NewPost extends Component {
                     <textarea 
                             type = "text" 
                             name="description" 
-                            value={this.state.post.description} 
+                            value={this.state.post.desc} 
                             onChange={this.changeHandler}
                             required/> 
                     <button 
