@@ -29,7 +29,6 @@ input[type=text], select{
   }
   
   .Center {
-    /* margin-top: auto; */
     text-align: center;
   }
 
@@ -61,8 +60,7 @@ input[type=text], select{
   
   .Print {
     width: 100%;
-    margin: 20px 0 40px 0;
-    /* margin: 20px 20px 40px; */
+    margin: 100px 0 40px 0;
   }
 
   @media (min-width: 600px) {
@@ -70,4 +68,5 @@ input[type=text], select{
       width: 60%;
     }
   }
+
 

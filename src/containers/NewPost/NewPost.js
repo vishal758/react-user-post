@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import Aux from '../../hoc/Aux/Aux'
 import classes from './NewPost.module.css'
-import axios from '../../axios-post'
+import axios from '../../Axios/axios-post'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 class NewPost extends Component {
     state = {
         post: {
@@ -43,7 +45,7 @@ class NewPost extends Component {
     submitClicked = () => {
         this.setState({submitting: true})
         const post = this.state.post
-        axios.post('/users/ptyagi/posts', post)
+        axios.post('/users/goyalanubhav11/posts', post)
         // axios.post('https://burger-react-app-50038.firebaseio.com/post.json', post)
         .then(response => {
             console.log(response.data)
@@ -51,6 +53,7 @@ class NewPost extends Component {
         .catch(error => {
             console.log(error)
         })
+        this.props.history.push({pathname: 'allPosts'})
         // alert("Post submitted")
     }
     render() {
@@ -66,7 +69,9 @@ class NewPost extends Component {
         return (
             <Aux>
                 <div className={classes.Print}>
-                    <h3 className={classes.Center}>CREATE A POST</h3>
+                    <h3 className={classes.Center}>CREATE A POST <FontAwesomeIcon icon={faTwitter} size="sm" /></h3>
+                    
+
                     {/* Title: {this.state.props.post.title} */}
                     {/* <br /> */}
 

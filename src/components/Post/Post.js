@@ -18,28 +18,17 @@ const post = (props) => {
                 <div className={classes.BlogCard}>
                     <div className={classes.Meta}>
                         <div className={classes.Photo} style={{backgroundImage: "url(" + img +")"}}></div>
-                        {/* <ul classname={classes.Details}>
-                            <li className={classes.Author}><a href="#">{props.author}</a></li>
-                            <li className={classes.Date}>Aug. 24, 2015</li>
-                            <li className={classes.Tags}>
-                            <ul>
-                                <li><a href="#">Learn</a></li>
-                                <li><a href="#">Code</a></li>
-                                <li><a href="#">HTML</a></li>
-                                <li><a href="#">CSS</a></li>
-                            </ul>
-                            </li>
-                        </ul> */}
                     </div>
                     <div className={classes.Description}>
-                    <h1>{props.title}</h1>
-                    <h2>Author: {props.author}</h2>
-                        <p> {props.desc}</p>
-                    <p>{props.lastModifiedDate}</p>
-                    <p className={classes.ReadMore}  onClick={props.clicked}>
-                        {/* Read More */}
-                        <Link to ="">Read More</Link>
-                    </p>
+                        <h1>{props.title}</h1>
+                        <h2>Author: {props.author}</h2>
+                            <p className={classes.Desc}> {props.desc}</p>
+                        {/* <div></div> */}
+                        <h3 className={classes.LastModifiedDate}>Last Modified At: {props.lastModifiedDate}</h3>
+                        <p className={classes.ReadMore}  onClick={props.clicked}>
+                            {/* Read More */}
+                            <Link to="">READ MORE</Link>                        
+                        </p>
                     </div>
                 </div>
             </article>
