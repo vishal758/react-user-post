@@ -37,7 +37,6 @@ class Posts extends Component {
     }
 
     postSelectedHandler = (id) => {
-        // console.log("called: " + id)
         this.props.history.push({pathname: '/allPosts/' + id})
         // this.props.history.push('/allPosts' + id)
 
@@ -45,7 +44,6 @@ class Posts extends Component {
     }
 
     render() {
-        // console.log("type: " + typeof(this.state.posts))
         console.log("selected id: " + this.state.selectedPostId)
         let posts = <p>Something went wrong</p>
         if(this.state.posts) {

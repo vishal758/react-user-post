@@ -7,13 +7,6 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
 class SignIn extends Component {
 
-    // state = {
-    //     signInInfo: {
-    //         username: '',
-    //         password: ''            
-    //     }   
-    // }    
-
     state = {
         signInCred: {
             username: {
@@ -54,14 +47,6 @@ class SignIn extends Component {
             isValid = value.trim() !== '' && isValid;
         }
 
-        // if(rules.minLength) {
-        //     isValid = value.length >= rules.minLength && isValid;
-        // }
-
-        // if(rules.maxLength) {
-        //     isValid = value.length <= rules.maxLength && isValid;
-        // }
-
         return isValid
 
     }
@@ -88,20 +73,6 @@ class SignIn extends Component {
         this.setState({signInCred: updatedSignInForm, formIsValid: formIsValid})
     }
 
-    // changeHandler = (event) => {
-    //     const signInInfo = {...this.state.signInInfo}        
-    //     const name = event.target.name
-    //     const val = event.target.value
-
-    //     if(name === 'username')
-    //     signInInfo.username = val
-        
-    //     if(name === 'password')
-    //     signInInfo.password = val
-
-    //     this.setState({signInInfo: signInInfo})
-    // }
-
     submitClicked = (event) => {
 
         event.preventDefault()
@@ -112,7 +83,6 @@ class SignIn extends Component {
         for(let formElementIdentifier in this.state.signInCred) {
             formData[formElementIdentifier] = this.state.signInCred[formElementIdentifier].value
         }
-
 
         const signInInfo = formData
         axios.post('/signin', signInInfo)
@@ -125,7 +95,6 @@ class SignIn extends Component {
             this.setState({loading: false})
             console.log(error)
         })
-        // alert("Post submitted")
     }
 
     render() {
@@ -153,24 +122,10 @@ class SignIn extends Component {
                                     changed={(event) => this.inputChangeHandler(event, formElement.id)} />
                             ))
                         }
-                        {/* <input 
-                            name="username" 
-                            placeholder="Username" 
-                            type="text"
-                            value={this.state.signInInfo.username}
-                            onChange={this.changeHandler}/>
 
-                        <input 
-                            id='pw' 
-                            name='password' 
-                            placeholder='Password' 
-                            type='password' 
-                            onChange={this.changeHandler}/> */}
-
-                        <button className={classes.Animated} onClick={this.submitClicked}>SignIn</button>
+                        <button className={classes.Animated} onClick={this.submitClicked} disabled={!this.state.formIsValid}>SignIn</button>
                         <div className = {classes.Forgot}>Don't have an account?<Link to='/signup'> SignUp</Link></div>
-                    </Aux>
-                        
+                    </Aux>                        
         )
 
         if(this.state.loading) {
@@ -185,30 +140,6 @@ class SignIn extends Component {
                         {form}
                     </div>                    
                 </div>
-                {/* <div className={classes.Cont}>
-                    <div className={classes.Login}>
-                        <h2>
-                            Sign In 
-                        </h2>
-                        <input 
-                            name="username" 
-                            placeholder="Username" 
-                            type="text"
-                            value={this.state.signInInfo.username}
-                            onChange={this.changeHandler}/>
-
-                        <input 
-                            id='pw' 
-                            name='password' 
-                            placeholder='Password' 
-                            type='password' 
-                            onChange={this.changeHandler}/>
-
-                        <button className={classes.Animated} onClick={this.submitClicked}>SignIn</button>
-                        <div className = {classes.Forgot}>Don't have an account?<Link to='/signup'> SignUp</Link></div>
-
-                    </div>
-                </div> */}
             </Aux>
         )
     }

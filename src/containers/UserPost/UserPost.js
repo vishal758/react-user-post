@@ -11,7 +11,7 @@ class UserPost extends Component {
     render() {
         return(
             <div>
-                <Route path="/" exact component={Posts} />           
+                <Route path="/" exact component={SignUp} />           
                 <Switch>
                     <Route path="/signup" component = {SignUp} />
                     <Route path="/signin" component = {SignIn} />

@@ -32,28 +32,20 @@ class FullPost extends Component {
             console.log(this.state.loadedPost)
             post = (
                 <Aux>
-                    {/* <h1 className = {classes.Head} >lorem ispum da pel lorem !</h1> */}
                     <article className={classes.Container}>
                         <div className={classes.FullPost}>
-                            {/* main div */}
                             <div className={classes.Meta}>
                             <div className={classes.Photo} style={{backgroundImage: "url(" + img +")"}}></div>
-                                {/* PIC SECTION */}
                             </div>
                             <div>
-                                {/* content section including heading */}
                                 <div className={classes.Title}>
                                     <h1>{this.state.loadedPost.title}</h1>
-                                    {/* heading section */}
                                 </div>
                                 <div className={classes.Description}>
                                     <h2>Author: {this.state.loadedPost.author}</h2>
                                     <p>{this.state.loadedPost.desc}</p>
-                                    {/* content section */}
                                     <div>
-                                    {/* <p></p> */}
                                     <h3>Last Modified At: {this.state.loadedPost.lastModifiedDate}</h3>
-                                    {/* author and last modified date */}
                                     </div>
                                 </div>
                                 

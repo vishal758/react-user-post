@@ -8,14 +8,6 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Spinner from '../../components/UI/Spinner/Spinner'
 
 class NewPost extends Component {
-    // state = {
-    //     post: {
-    //         title: '',
-    //         desc: ''
-    //     },
-    //     submittable: false,
-    //     submitting: false
-    // }
 
     state = {
         newPost: {
@@ -57,14 +49,6 @@ class NewPost extends Component {
             isValid = value.trim() !== '' && isValid;
         }
 
-        // if(rules.minLength) {
-        //     isValid = value.length >= rules.minLength && isValid;
-        // }
-
-        // if(rules.maxLength) {
-        //     isValid = value.length <= rules.maxLength && isValid;
-        // }
-
         return isValid
 
     }
@@ -90,20 +74,6 @@ class NewPost extends Component {
 
         this.setState({newPost: updatedNewPostForm, formIsValid: formIsValid})
     }
-    // changeHandler = (event) => {
-    //     const Post = {...this.state.post}        
-    //     const name = event.target.name
-    //     const val = event.target.value
-
-    //     if(name === 'title')
-    //     Post.title = val
-        
-    //     if(name === 'description')
-    //     Post.desc = val
-
-    //     this.setState({post: Post})
-
-    // }
 
     submitHandler = () => {
         let submit = false
@@ -128,21 +98,17 @@ class NewPost extends Component {
         }
 
         const newPost = formData
-        // this.setState({submitting: true})
-        // const post = this.state.post
         axios.post('/users/vishal758/posts', newPost)
         // axios.post('https://burger-react-app-50038.firebaseio.com/post.json', post)
         .then(response => {
-            console.log(response.data)
             this.setState({loading: false})
             this.props.history.push({pathname: 'allPosts'})
         })
         .catch(error => {
             this.setState({loading: false})
-            console.log(error)
         })
-        // alert("Post submitted")
     }
+
     render() {
 
         const formElementArray = []
@@ -181,38 +147,9 @@ class NewPost extends Component {
             <Aux>
                 <div className={classes.Print}>
                     <h3 className={classes.Center}>CREATE A POST <FontAwesomeIcon icon={faTwitter} size="sm" /></h3>
-                    
-
-                    {/* Title: {this.state.props.post.title} */}
-                    {/* <br /> */}
-
-                    {/* Description : {this.state.post.description} */}
                 </div>
                 <br />
                 {form}
-                {/* <div className = {classes.Container}>
-                    <label>
-                        Title:                     
-                    </label>
-                    <input 
-                            type="text" 
-                            name="title" 
-                            value={this.state.post.title}
-                            onChange={this.changeHandler}
-                            required/>
-                    <br />
-                    <label>
-                        Description:
-                    </label>
-                    <textarea 
-                            type = "text" 
-                            name="description" 
-                            value={this.state.post.desc} 
-                            onChange={this.changeHandler}
-                            required/> 
-                    <button 
-                        onClick={this.submitClicked}>Submit</button>
-                </div> */}
             </Aux>
 
         )

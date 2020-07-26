@@ -53,10 +53,6 @@ input[type=text], select{
     margin: 4px 2px;
     cursor: pointer;
   }
-
-  button:disabled {
-    background-color: #fb0909;
-  }
   
   .Print {
     width: 100%;

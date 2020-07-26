@@ -3,10 +3,12 @@ import axios from '../../Axios/axios-post'
 import User from '../../components/User/User'
 import Aux from '../../hoc/Aux/Aux'
 import classes from './Users.module.css'
+import Spinner from '../../components/UI/Spinner/Spinner'
 class Users extends Component {
     state = {
         users: [],
-        selecteduserId: null
+        selecteduserId: null,
+        loading: true
     }
     componentDidMount() {
         axios.get('/users')
@@ -24,7 +26,7 @@ class Users extends Component {
                     }
                 }
             )
-            this.setState({users: updatedUsers})
+            this.setState({users: updatedUsers, loading: false})
         })
         .catch(error => {
             console.log(error)
@@ -32,7 +34,6 @@ class Users extends Component {
     }   
 
     render() {
-        // console.log("users: " + this.state.users)
         let users = <p>Something went wrong</p>
         if(this.state.users) {
             users = this.state.users.map(
@@ -51,6 +52,10 @@ class Users extends Component {
                         )
                 }
             )
+
+            if(this.state.loading) {
+                users = <Spinner />
+            }
         }
         return (
             <Aux>

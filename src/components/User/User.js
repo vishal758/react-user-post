@@ -7,22 +7,14 @@ import classes from './User.module.css'
 const user = (props) => {
 
     return (
-        // <article>
-        //     <div className={classes.User}>
-        //         <div className={classes.Image}>
-        //             <img></img>
-        //         </div>
-        //     </div>
-        // </article>
+
         <article>
-            {/* <h2 style={{textAlign: 'center'}}>User Profile Card</h2> */}
 
             <div className={classes.User}>
                 <div className={classes.Image}>
                     <img src="https://randomuser.me/api/portraits/women/79.jpg" alt="John" />
                 </div>
                 <div className={classes.Cont}>
-                    {/* <div></div> */}
                     <h1>{props.username}</h1>
                     <p className={classes.Title}>CEO and Founder, Example</p>
                     <p>Harvard University</p>
