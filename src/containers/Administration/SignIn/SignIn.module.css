@@ -31,7 +31,7 @@
   
   .Login input[type="text"], input[type="password"] {
     width: 350px;
-    padding: 20px 0px;
+    padding: 10px 0px;
     background: transparent;
     border: 0;
     border-bottom: 1px solid #435160;
