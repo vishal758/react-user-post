@@ -3,10 +3,11 @@ import classes from './FullPost.module.css'
 import Aux from '../../hoc/Aux/Aux'
 import axios from '../../Axios/axios-post'
 import img from '../../assets/images/img.jpg'
-
+import Spinner from '../../components/UI/Spinner/Spinner'
 class FullPost extends Component {
     state = {
-        loadedPost: null
+        loadedPost: null,
+        loading: true
     }
 
     componentDidMount() {
@@ -14,9 +15,10 @@ class FullPost extends Component {
             if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id)) {
                 axios.get('/allPosts/' + this.props.match.params.id)
                 .then(response => {
-                    this.setState({loadedPost: response.data})
+                    this.setState({loadedPost: response.data, loading: false})
                 }) .catch(error => {
                     console.log(error)
+                    this.setState({loading: false})
                 })
             }
         }
@@ -25,9 +27,13 @@ class FullPost extends Component {
     render() {
         console.log(this.props)
         let post = <p style={{textAlign: 'center'}}>Please select a Post!</p>;
-        if(this.props.id) {
-            post = <p style={{textAlign: 'center'}}>Loading...</p>;
+        // if(this.props.id) {
+        //     post = <p style={{textAlign: 'center'}}>Loading...</p>;
+        // }
+        if(this.state.loading) {
+            post = <Spinner />
         }
+        
         if(this.state.loadedPost) {
             console.log(this.state.loadedPost)
             post = (

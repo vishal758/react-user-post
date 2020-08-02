@@ -3,51 +3,37 @@ import axios from '../../Axios/axios-post'
 import Post from '../../components/Post/Post'
 import classes from "./Posts.module.css";
 import Aux from '../../hoc/Aux/Aux'
+import Spinner from '../../components/UI/Spinner/Spinner'
+import * as actions from '../../store/actions/index'
+import { connect } from "react-redux";
+
 class Posts extends Component {
     state = {
-        posts: [],
-        selectedPostId: null
+        // posts: [],
+        selectedPostId: null,
+        // loading: true
     }
 
     componentDidMount () {
         console.log("posts")
-        axios.get("/allPosts")
-        // axios.get("https://burger-react-app-50038.firebaseio.com/post.json")
-        .then(response => {
-            console.log(response.data)
-            const posts = response.data
-            const updatedPosts = posts.map(                
-                post => {
-                    return {         
-                        id: post.id,               
-                        title: post.title,
-                        description: post.desc,
-                        author: post.author,
-                        lastModifiedDate: post.lastModifiedDate,
-                        userId: post.userId
-                    }
-                }
-            )
-            console.log("updatedposts: " + updatedPosts)
-            this.setState({posts: updatedPosts})
-        })
-        .catch(error => {
-            console.log(error)
-        })
+        this.props.onFetchPosts()
     }
 
     postSelectedHandler = (id) => {
+        this.setState({selectedPostId: id})
         this.props.history.push({pathname: '/allPosts/' + id})
         // this.props.history.push('/allPosts' + id)
 
-        this.setState({selectedPostId: id})
     }
 
     render() {
-        console.log("selected id: " + this.state.selectedPostId)
+        // console.log("selected id: " + this.state.selectedPostId)
         let posts = <p>Something went wrong</p>
-        if(this.state.posts) {
-            posts = this.state.posts.map(
+        console.log(this.props.loading)
+        if(this.props.loading)
+            posts = <Spinner />
+        if(this.props.posts) {
+            posts = this.props.posts.map(
                 post => {
                     return (
                         // <Link to = {'/allPosts/' + post.id} key = {post.id}>
@@ -74,4 +60,17 @@ class Posts extends Component {
     }
 }
 
-export default Posts
+const mapStateToProps = state => {
+    return {
+        loading: state.post.loading,
+        posts: state.post.posts
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchPosts: () => dispatch(actions.fetchPosts())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)

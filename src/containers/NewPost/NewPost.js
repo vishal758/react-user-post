@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Input from '../../components/UI/Input/Input'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import Spinner from '../../components/UI/Spinner/Spinner'
+import { connect } from 'react-redux'
+import * as actions from '../../store/actions/index'
+import { Redirect } from 'react-router'
 
 class NewPost extends Component {
 
@@ -38,8 +41,7 @@ class NewPost extends Component {
                 touched: false
             },
         },
-        formIsValid: false,
-        loading: false
+        formIsValid: false
     }
 
     checkValidity(value, rules) {
@@ -75,21 +77,9 @@ class NewPost extends Component {
         this.setState({newPost: updatedNewPostForm, formIsValid: formIsValid})
     }
 
-    submitHandler = () => {
-        let submit = false
-        let disInfo = {
-            ...this.state.post
-        }
-        for(let key in disInfo) {
-            if(disInfo[key] === "") submit = true
-        }
-
-        this.setState({submittable: submit})
-    }
-
     submitClicked = (event) => {
         event.preventDefault();
-        this.setState({loading: true})
+        // this.setState({loading: true})
 
         const formData = {}
 
@@ -98,15 +88,7 @@ class NewPost extends Component {
         }
 
         const newPost = formData
-        axios.post('/users/vishal758/posts', newPost)
-        // axios.post('https://burger-react-app-50038.firebaseio.com/post.json', post)
-        .then(response => {
-            this.setState({loading: false})
-            this.props.history.push({pathname: 'allPosts'})
-        })
-        .catch(error => {
-            this.setState({loading: false})
-        })
+        this.props.onSubmitPost(newPost)
     }
 
     render() {
@@ -139,12 +121,15 @@ class NewPost extends Component {
             </form>
         )
 
-        if(this.state.loading) {
+        if(this.props.loading) {
             form = <Spinner />
         }
+        
+        const submittedRedirect = this.props.submitted ? <Redirect to="/allPosts" /> : null
 
         return (
             <Aux>
+                {submittedRedirect}
                 <div className={classes.Print}>
                     <h3 className={classes.Center}>CREATE A POST <FontAwesomeIcon icon={faTwitter} size="sm" /></h3>
                 </div>
@@ -156,4 +141,16 @@ class NewPost extends Component {
     }
 }
 
-export default NewPost
+const mapStateToProps = state => {
+    return {
+        loading: state.post.loading,
+        submitted: state.post.submitted
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitPost: (postData) => dispatch(actions.submitPost(postData))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewPost)

@@ -4,39 +4,21 @@ import User from '../../components/User/User'
 import Aux from '../../hoc/Aux/Aux'
 import classes from './Users.module.css'
 import Spinner from '../../components/UI/Spinner/Spinner'
+import * as actions from '../../store/actions/index'
+import { connect } from 'react-redux'
+
 class Users extends Component {
     state = {
-        users: [],
         selecteduserId: null,
-        loading: true
     }
     componentDidMount() {
-        axios.get('/users')
-        .then(response => {
-            const users = response.data
-            console.log(users)
-            const updatedUsers = users.map(
-                user => {
-                    return  {
-                        id: user.id,
-                        username: user.username,
-                        email: user.email,
-                        role: user.role,
-                        userProfileData: user.userProfileData
-                    }
-                }
-            )
-            this.setState({users: updatedUsers, loading: false})
-        })
-        .catch(error => {
-            console.log(error)
-        })
+        this.props.onFetchUsers()
     }   
 
     render() {
         let users = <p>Something went wrong</p>
-        if(this.state.users) {
-            users = this.state.users.map(
+        if(this.props.users) {
+            users = this.props.users.map(
                 user => {
                     return (
                         // <Link to = {'/allPosts/' + post.id} key = {post.id}>
@@ -53,7 +35,7 @@ class Users extends Component {
                 }
             )
 
-            if(this.state.loading) {
+            if(this.props.loading) {
                 users = <Spinner />
             }
         }
@@ -67,4 +49,17 @@ class Users extends Component {
     }
 }
 
-export default Users
+const mapStateToProps = state => {
+    return {
+        loading: state.user.loading,
+        users: state.user.users
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchUsers: () => dispatch(actions.fetchUsers())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users)
