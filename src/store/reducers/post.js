@@ -5,7 +5,8 @@ const initialState = {
     posts: [],
     submitted: false,
     loading: false,
-    error: null
+    error: null,
+    fullPost: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +30,15 @@ const reducer = (state = initialState, action) => {
             return updateObject(state, {
                 posts: action.posts,
                 loading: false
+            })
+        case actionTypes.FETCH_FULLPOST_START:
+            return updateObject(state, {loading: true})
+        case actionTypes.FETCH_FULLPOST_FAIL:
+            return updateObject(state, {loading: false, error: action.error})
+        case actionTypes.FETCH_FULLPOST_SUCCESS:
+            return updateObject(state, {
+                loading: false, 
+                fullPost: action.fullPost
             })
         default:
             return state

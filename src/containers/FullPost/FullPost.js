@@ -4,38 +4,31 @@ import Aux from '../../hoc/Aux/Aux'
 import axios from '../../Axios/axios-post'
 import img from '../../assets/images/img.jpg'
 import Spinner from '../../components/UI/Spinner/Spinner'
+import * as actions from '../../store/actions/index'
+import { connect } from 'react-redux'
+
 class FullPost extends Component {
-    state = {
-        loadedPost: null,
-        loading: true
-    }
 
     componentDidMount() {
         if(this.props.match.params.id) {
-            if(!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id !== this.props.match.params.id)) {
-                axios.get('/allPosts/' + this.props.match.params.id)
-                .then(response => {
-                    this.setState({loadedPost: response.data, loading: false})
-                }) .catch(error => {
-                    console.log(error)
-                    this.setState({loading: false})
-                })
+            if(!this.props.loadedPost || (this.props.loadedPost && this.props.loadedPost.id !== this.props.match.params.id)) {
+                this.props.onFetchFullPost(this.props.match.params.id)
             }
         }
     }
 
     render() {
-        console.log(this.props)
+        console.log(this.props.loading)
         let post = <p style={{textAlign: 'center'}}>Please select a Post!</p>;
         // if(this.props.id) {
         //     post = <p style={{textAlign: 'center'}}>Loading...</p>;
         // }
-        if(this.state.loading) {
+        if(this.props.loading) {
             post = <Spinner />
         }
         
-        if(this.state.loadedPost) {
-            console.log(this.state.loadedPost)
+        if(this.props.loadedPost) {
+            console.log(this.props.loadedPost)
             post = (
                 <Aux>
                     <article className={classes.Container}>
@@ -45,13 +38,13 @@ class FullPost extends Component {
                             </div>
                             <div>
                                 <div className={classes.Title}>
-                                    <h1>{this.state.loadedPost.title}</h1>
+                                    <h1>{this.props.loadedPost.title}</h1>
                                 </div>
                                 <div className={classes.Description}>
-                                    <h2>Author: {this.state.loadedPost.author}</h2>
-                                    <p>{this.state.loadedPost.desc}</p>
+                                    <h2>Author: {this.props.loadedPost.author}</h2>
+                                    <p>{this.props.loadedPost.desc}</p>
                                     <div>
-                                    <h3>Last Modified At: {this.state.loadedPost.lastModifiedDate}</h3>
+                                    <h3>Last Modified At: {this.props.loadedPost.lastModifiedDate}</h3>
                                     </div>
                                 </div>
                                 
@@ -72,4 +65,17 @@ class FullPost extends Component {
     }
 }
 
-export default FullPost
+const mapStateToProps = state => {
+    return {
+        loadedPost: state.post.fullPost,
+        loading: state.post.loading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchFullPost: (postId) => dispatch(actions.fetchFullPost(postId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FullPost)

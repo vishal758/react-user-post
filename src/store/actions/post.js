@@ -91,3 +91,38 @@ export const fetchPosts = () => {
         })
     }
 }
+
+export const fetchFullPostSuccess = (fullPost) => {
+    return {
+        type: actionTypes.FETCH_FULLPOST_SUCCESS,
+        fullPost: fullPost
+    }
+}
+
+export const fetchFullPostFail = (error) => {
+    return {
+        type: actionTypes.FETCH_FULLPOST_FAIL,
+        error: error
+    }
+}
+
+export const fetchFullPostStart = () => {
+    return {
+        type: actionTypes.FETCH_FULLPOST_START
+    }
+}
+
+export const fetchFullPost = (id) => {
+    return dispatch => {
+        dispatch(fetchFullPostStart())
+        axios.get('/allPosts/' + id)
+                .then(response => {
+                    dispatch(fetchFullPostSuccess(response.data))
+                    // this.setState({loadedPost: response.data, loading: false})
+                }) .catch(error => {
+                    dispatch(fetchFullPostFail(error))
+                    // console.log(error)
+                    // this.setState({loading: false})
+                })
+    }
+}

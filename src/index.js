@@ -7,11 +7,11 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 // import reducer from './store/reducer'
 import thunk from 'redux-thunk'
-import newPostReducer from './store/reducers/post'
+import postReducer from './store/reducers/post'
 import userReducer from './store/reducers/user'
 
 const rootReducer = combineReducers({
-  post: newPostReducer,
+  post: postReducer,
   user: userReducer
 })
 
