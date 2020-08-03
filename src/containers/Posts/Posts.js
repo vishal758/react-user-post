@@ -21,9 +21,14 @@ class Posts extends Component {
 
     postSelectedHandler = (id) => {
         this.setState({selectedPostId: id})
-        this.props.history.push({pathname: '/allPosts/' + id})
+        if(this.props.isAuth) {
+            this.props.history.push({pathname: '/allPosts/' + id})
+        } else {
+            this.props.onSetAuthRedirectPath('/allPosts/' + id)
+            this.props.history.push("/signin")
+        }
+        
         // this.props.history.push('/allPosts' + id)
-
     }
 
     render() {
@@ -63,13 +68,15 @@ class Posts extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.post.loading,
-        posts: state.post.posts
+        posts: state.post.posts,
+        isAuth: state.auth.token !== null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchPosts: () => dispatch(actions.fetchPosts())
+        onFetchPosts: () => dispatch(actions.fetchPosts()),
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     }
 }
 

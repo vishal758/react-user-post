@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import Aux from '../../../hoc/Aux/Aux'
 import classes from './SignUp.module.css'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from '../../../Axios/axios-userAuth'
 import Input from '../../../components/UI/Input/Input'
 import Spinner from '../../../components/UI/Spinner/Spinner'
+import * as actions from '../../../store/actions/index'
+import { connect } from 'react-redux'
+
 class SignUp extends Component {
 
     state = {
@@ -103,14 +106,7 @@ class SignUp extends Component {
         }
         
         const signUpInfo = formData
-        axios.post('/signup', signUpInfo)
-        .then(response => {
-            this.setState({loading: false})
-            this.props.history.push({pathname: 'allPosts'})
-        })
-        .catch(error => {
-            this.setState({loading: false})
-        })
+        this.props.onSubmitSignUp(signUpInfo)
     }
 
     render() {
@@ -144,12 +140,18 @@ class SignUp extends Component {
                 
         )
 
-        if(this.state.loading) {
+        if(this.props.loading) {
             form = <Spinner />
+        }
+
+        let signUpRedirect = null
+        if(this.props.successfulSignUp) {
+            signUpRedirect = <Redirect to = "/signin" />
         }
 
         return (
             <Aux>
+                {signUpRedirect}
                 <div className={classes.Cont}>
                     <div className={classes.Login}>
                         <h2>
@@ -163,4 +165,17 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        successfulSignUp: state.auth.signUpSuccess
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitSignUp: (signUpData) => dispatch(actions.submitSignUp(signUpData))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp)

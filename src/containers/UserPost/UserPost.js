@@ -6,15 +6,17 @@ import FullPost from '../FullPost/FullPost'
 import Users from '../Users/Users'
 import SignUp from '../Administration/SignUp/SignUp'
 import SignIn from '../Administration/SignIn/SignIn'
+import Logout from '../Administration/Logout/Logout'
 class UserPost extends Component {
     
     render() {
         return(
             <div>
-                <Route path="/" exact component={SignUp} />           
+                <Route path="/" exact component={SignIn} />           
                 <Switch>
                     <Route path="/signup" component = {SignUp} />
                     <Route path="/signin" component = {SignIn} />
+                    <Route path="/logout" component = {Logout} />
                     <Route path="/allPosts" exact component={Posts} />
                     <Route path="/newPost" component = {NewPost}/>
                     <Route path="/allPosts/:id" component = {FullPost} />

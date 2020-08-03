@@ -5,9 +5,22 @@ import NavigationItem from './NavigationItem/NavigationItem'
 const NavigationItems = props => {
     return (
         <ul className={classes.NavigationItems}>
-            <NavigationItem link="/newPost" > New Post </NavigationItem>
+            {
+                props.isAuthenticated 
+                    ? <NavigationItem link="/newPost" > New Post </NavigationItem>
+                    : null
+            }
             <NavigationItem link="/allPosts" > AllPosts </NavigationItem>
-            <NavigationItem link="/users"> Users </NavigationItem>
+            {
+                props.isAuthenticated
+                    ? <NavigationItem link="/users"> Users </NavigationItem>
+                    : null
+            }
+            {
+                !props.isAuthenticated
+                    ? <NavigationItem link="/signin"> SignIn </NavigationItem>
+                    : <NavigationItem link="/logout"> Logout </NavigationItem>
+            }
         </ul>
     )
 }

@@ -2,11 +2,19 @@ import React, { Component } from 'react'
 import Aux from '../../../hoc/Aux/Aux'
 import classes from './SignIn.module.css'
 import axios from '../../../Axios/axios-userAuth'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
+import * as actions from '../../../store/actions/index'
+import { connect } from 'react-redux'
+
 class SignIn extends Component {
 
+    componentDidMount() {
+        if(this.props.isAuth) {
+            this.props.onSetAuthRedirectPath("/allPosts")
+        }
+    }
     state = {
         signInCred: {
             username: {
@@ -85,16 +93,7 @@ class SignIn extends Component {
         }
 
         const signInInfo = formData
-        axios.post('/signin', signInInfo)
-        .then(response => {
-            console.log(response.data)
-            this.setState({loading: false})
-            this.props.history.push({pathname: 'allPosts'})
-        })
-        .catch(error => {
-            this.setState({loading: false})
-            console.log(error)
-        })
+        this.props.onSubmitSignIn(signInInfo)
     }
 
     render() {
@@ -128,12 +127,17 @@ class SignIn extends Component {
                     </Aux>                        
         )
 
-        if(this.state.loading) {
+        if(this.props.loading) {
             form = <Spinner />
         }
 
+        let signInRedirect = null
+        if(this.props.successfulSignIn) {
+            signInRedirect = <Redirect to = {this.props.authRedirectPath} />
+        }
         return (
             <Aux>
+                {signInRedirect}
                 <div className={classes.Cont}>
                     <div className={classes.Login}>
                         <h2>Sign In</h2>
@@ -145,4 +149,20 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading,
+        successfulSignIn: state.auth.signInSuccess,
+        isAuth: state.auth.token !== null,
+        authRedirectPath: state.auth.authRedirectPath
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSubmitSignIn: (signIncred) => dispatch(actions.signIn(signIncred)),
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

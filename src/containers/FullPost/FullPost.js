@@ -6,6 +6,7 @@ import img from '../../assets/images/img.jpg'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 class FullPost extends Component {
 
@@ -18,12 +19,18 @@ class FullPost extends Component {
     }
 
     render() {
-        console.log(this.props.loading)
+        // console.log(this.props.loading)
         let post = <p style={{textAlign: 'center'}}>Please select a Post!</p>;
         // if(this.props.id) {
         //     post = <p style={{textAlign: 'center'}}>Loading...</p>;
         // }
-        if(this.props.loading) {
+        console.log("successful sign: ", this.props.isAuth)
+        // let redirectSignIn = null
+        // if(!this.props.isAuth) {
+        //     redirectSignIn = <Redirect to = "/signin" />
+        // }
+
+        if(this.props.loading && this.props.isAuth) {
             post = <Spinner />
         }
         
@@ -56,10 +63,14 @@ class FullPost extends Component {
             // console.log(post)
         }
         return (  
-            <section>
-                {/* <h1>HELLO THIS IS FULL POST</h1> */}
-                {post}
-            </section>         
+            <Aux>
+                {/* {redirectSignIn} */}
+                <section>
+                    {/* <h1>HELLO THIS IS FULL POST</h1> */}
+                    {post}
+                </section> 
+            </Aux>
+        
             
         )
     }
@@ -68,7 +79,8 @@ class FullPost extends Component {
 const mapStateToProps = state => {
     return {
         loadedPost: state.post.fullPost,
-        loading: state.post.loading
+        loading: state.post.loading,
+        isAuth: state.auth.token !== null
     }
 }
 
