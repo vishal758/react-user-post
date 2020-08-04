@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from '../../Axios/axios-post'
 import Post from '../../components/Post/Post'
 import classes from "./Posts.module.css";
 import Aux from '../../hoc/Aux/Aux'

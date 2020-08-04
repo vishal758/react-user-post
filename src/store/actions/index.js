@@ -1,7 +1,8 @@
 export {
     submitPost,
     fetchPosts,
-    fetchFullPost
+    fetchFullPost,
+    editPost
 } from './post'
 
 export {

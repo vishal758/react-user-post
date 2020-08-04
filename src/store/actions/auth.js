@@ -64,7 +64,7 @@ export const signIn = (signInData) => {
         axios.post('/signin', signInData)
         .then(response => {
             dispatch(signInSuccess(response.data))
-            dispatch(checkAuthTimeout(36000))
+            dispatch(checkAuthTimeout(360000))
             // console.log(response.data)
             // this.setState({loading: false})
             // this.props.history.push({pathname: 'allPosts'})

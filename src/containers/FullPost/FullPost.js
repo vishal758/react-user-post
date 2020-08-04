@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import classes from './FullPost.module.css'
 import Aux from '../../hoc/Aux/Aux'
-import axios from '../../Axios/axios-post'
 import img from '../../assets/images/img.jpg'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux'
-import {Redirect} from 'react-router-dom'
 
 class FullPost extends Component {
 
@@ -17,6 +15,12 @@ class FullPost extends Component {
             }
         }
     }
+    
+    editHandler = () => {
+        console.log(this.props)
+        this.props.history.push(this.props.match.url + '/edit')
+        // this.props.history.push('/' + '/edit')
+    }
 
     render() {
         // console.log(this.props.loading)
@@ -24,7 +28,7 @@ class FullPost extends Component {
         // if(this.props.id) {
         //     post = <p style={{textAlign: 'center'}}>Loading...</p>;
         // }
-        console.log("successful sign: ", this.props.isAuth)
+        // console.log("successful sign: ", this.props.isAuth)
         // let redirectSignIn = null
         // if(!this.props.isAuth) {
         //     redirectSignIn = <Redirect to = "/signin" />
@@ -55,6 +59,9 @@ class FullPost extends Component {
                                     </div>
                                 </div>
                                 
+                            </div>
+                            <div>
+                                <button onClick={this.editHandler}>Edit</button>
                             </div>
                         </div>
                     </article>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Aux from '../../../hoc/Aux/Aux'
 import classes from './SignIn.module.css'
-import axios from '../../../Axios/axios-userAuth'
 import { Link, Redirect } from 'react-router-dom'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Input from '../../../components/UI/Input/Input'
@@ -132,8 +131,12 @@ class SignIn extends Component {
         }
 
         let signInRedirect = null
-        if(this.props.successfulSignIn) {
-            signInRedirect = <Redirect to = {this.props.authRedirectPath} />
+        if(this.props.isAuth) {
+            if(this.props.authRedirectPath === '/')
+                signInRedirect = <Redirect to = '/allPosts' />
+            else
+                signInRedirect = <Redirect to = {this.props.authRedirectPath} />
+
         }
         return (
             <Aux>

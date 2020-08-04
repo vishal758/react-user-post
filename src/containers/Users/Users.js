@@ -1,5 +1,4 @@
 import React, { Component } from 'react' 
-import axios from '../../Axios/axios-post'
 import User from '../../components/User/User'
 import Aux from '../../hoc/Aux/Aux'
 import classes from './Users.module.css'
