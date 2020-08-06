@@ -5,6 +5,7 @@ const initialState = {
     signUpCred: null,
     username: '',
     email: null,
+    userId: null,
     token: null,
     id: null,
     loading: false,
@@ -36,7 +37,7 @@ const reducer = (state = initialState, action) => {
                 signInSuccess: true,
                 loading: true,
                 error: null,
-                token: action.signInData.token,
+                token: action.signInData.accessToken,
                 username: action.signInData.username,
                 userId: action.signInData.id,
                 email: action.signInData.email,
@@ -56,6 +57,13 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SET_AUTH_REDIRECT_PATH:
             return updateObject(state, {
                 authRedirectPath: action.path
+            })
+        case actionTypes.AUTH_SUCCESS_TOKEN:
+            return updateObject(state, {
+                token: action.token,
+                userId: action.userId,
+                username: action.username,
+                email: action.email
             })
         default:
             return state

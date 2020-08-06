@@ -32,7 +32,8 @@ const reducer = (state = initialState, action) => {
                 posts: action.posts,
                 loading: false,
                 submitted: false,
-                fullPost: null
+                fullPost: null,
+                postEdited: false
             })
         case actionTypes.FETCH_FULLPOST_START:
             return updateObject(state, {loading: true})

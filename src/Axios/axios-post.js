@@ -4,12 +4,14 @@ const instance = axios.create({
     baseURL: 'http://localhost:8081'
 })
 
+// const token = localStorage.getItem('token')
+// console.log(token)
 instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 instance.defaults.headers.common['Access-Control-Allow-Credentials'] = 'false'
 instance.defaults.headers.common['Access-Control-Allow-Headers'] = '*'
 instance.defaults.headers.common['Access-Control-Expose-Headers'] = '*'
 instance.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS, *'
-
+// instance.defaults.headers.common['Authorization'] = 'Bearer ' + token
 
 
 instance.interceptors.request.use(requestConfig => {

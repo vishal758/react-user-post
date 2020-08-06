@@ -13,5 +13,6 @@ export {
     submitSignUp,
     signIn,
     logout,
-    setAuthRedirectPath
+    setAuthRedirectPath,
+    authCheckState
 } from './auth'

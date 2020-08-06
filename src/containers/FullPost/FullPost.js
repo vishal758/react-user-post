@@ -9,9 +9,18 @@ import { connect } from 'react-redux'
 class FullPost extends Component {
 
     componentDidMount() {
+        console.log("[FullPost] token: ", this.props.token)
         if(this.props.match.params.id) {
             if(!this.props.loadedPost || (this.props.loadedPost && this.props.loadedPost.id !== this.props.match.params.id)) {
-                this.props.onFetchFullPost(this.props.match.params.id)
+                this.props.onFetchFullPost(this.props.match.params.id, this.props.token)
+            }
+        }
+    }
+
+    componentDidUpdate() {
+        if(this.props.match.params.id) {
+            if(!this.props.loadedPost || (this.props.loadedPost && this.props.loadedPost.id !== this.props.match.params.id)) {
+                this.props.onFetchFullPost(this.props.match.params.id, this.props.token)
             }
         }
     }
@@ -34,7 +43,7 @@ class FullPost extends Component {
         //     redirectSignIn = <Redirect to = "/signin" />
         // }
 
-        if(this.props.loading && this.props.isAuth) {
+        if(this.props.loading ) {
             post = <Spinner />
         }
         
@@ -60,8 +69,17 @@ class FullPost extends Component {
                                 </div>
                                 
                             </div>
-                            <div>
-                                <button onClick={this.editHandler}>Edit</button>
+                            <div className={classes.Button}> 
+                                {
+                                    this.props.loggedInUsername === this.props.loadedPost.author
+                                        ? <button onClick={this.editHandler}>Edit</button>
+                                        : null                                          
+                                }
+                                {
+                                    this.props.loggedInUsername === this.props.loadedPost.author
+                                    ? <button className={classes.Danger}>Delete</button>
+                                    : null
+                                }
                             </div>
                         </div>
                     </article>
@@ -87,13 +105,15 @@ const mapStateToProps = state => {
     return {
         loadedPost: state.post.fullPost,
         loading: state.post.loading,
-        isAuth: state.auth.token !== null
+        token: state.auth.token,
+        isAuth: state.auth.token !== null,
+        loggedInUsername: state.auth.username
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchFullPost: (postId) => dispatch(actions.fetchFullPost(postId))
+        onFetchFullPost: (postId, token) => dispatch(actions.fetchFullPost(postId, token))
     }
 }
 

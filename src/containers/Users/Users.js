@@ -5,13 +5,14 @@ import classes from './Users.module.css'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 
 class Users extends Component {
     state = {
         selecteduserId: null,
     }
     componentDidMount() {
-        this.props.onFetchUsers()
+        this.props.onFetchUsers(this.props.token)
     }   
 
     render() {
@@ -36,10 +37,15 @@ class Users extends Component {
 
             if(this.props.loading) {
                 users = <Spinner />
-            }
+            }            
         }
+        let redirectUrl = null
+            if(!this.props.isAuth) {
+                redirectUrl = <Redirect to="/signin" />
+            }
         return (
             <Aux>
+                {redirectUrl}
                 <section className={classes.Users}>
                     {users}
                 </section>
@@ -51,13 +57,15 @@ class Users extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.user.loading,
-        users: state.user.users
+        users: state.user.users,
+        token: state.auth.token,
+        isAuth: state.auth.token !== null
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchUsers: () => dispatch(actions.fetchUsers())
+        onFetchUsers: (token) => dispatch(actions.fetchUsers(token))
     }
 }
 

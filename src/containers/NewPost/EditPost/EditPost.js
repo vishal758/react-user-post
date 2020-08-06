@@ -104,7 +104,7 @@ class EditPost extends Component {
         }
 
         const editPost = formData
-        this.props.onEditPost(this.props.editPostData.author, this.props.editPostData.id, editPost)
+        this.props.onEditPost(this.props.editPostData.author, this.props.editPostData.id, editPost, this.props.token)
     }
 
     render() {
@@ -173,13 +173,14 @@ const mapStateToProps = state => {
         loading: state.post.loading,
         editPostData: state.post.fullPost,
         isAuth: state.auth.token !== null,
+        token: state.auth.token,
         submitted: state.post.submitted,
         editSuccess: state.post.postEdited
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onEditPost: (username, id, editPostData) => dispatch(actions.editPost(username, id, editPostData))
+        onEditPost: (username, id, editPostData, token) => dispatch(actions.editPost(username, id, editPostData, token))
     }
 }
 

@@ -22,16 +22,18 @@ export const submitPostStart = () => {
     }
 }
 
-export const submitPost = (username, postData) => {
+export const submitPost = (username, postData, token) => {
     return dispatch => {
         dispatch(submitPostStart())
-        axios.post('/users/' + username + '/posts', postData)
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        console.log(headers)
+        axios.post('/users/' + username + '/posts', postData, {headers})
         // axios.post('https://burger-react-app-50038.firebaseio.com/post.json', post)
         .then(response => {
             console.log('submit response: ', response.data)
             dispatch(submitPostSuccess(response.data.resourceId, postData))
-            // this.setState({loading: false})
-            // this.props.history.push({pathname: 'allPosts'})
         })
         .catch(error => {
             dispatch(submitPostFail(error))
@@ -112,10 +114,14 @@ export const fetchFullPostStart = () => {
     }
 }
 
-export const fetchFullPost = (id) => {
+export const fetchFullPost = (id, token) => {
     return dispatch => {
         dispatch(fetchFullPostStart())
-        axios.get('/allPosts/' + id)
+        
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        axios.get('/allPosts/' + id, {headers})
             .then(response => {
                 dispatch(fetchFullPostSuccess(response.data))
                 // this.setState({loadedPost: response.data, loading: false})
@@ -148,10 +154,13 @@ export const editPostStart = () => {
     }
 }
 
-export const editPost = (username, postId, editData) => {
+export const editPost = (username, postId, editData, token) => {
     return dispatch => {
         dispatch(editPostStart())
-        axios.put('/users/' + username + '/posts/' + postId, editData)
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        axios.put('/users/' + username + '/posts/' + postId, editData, {headers})
             .then(response => {
                 dispatch(editPostSuccess())
                 // console.log("successful edit")

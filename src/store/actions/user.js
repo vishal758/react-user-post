@@ -21,10 +21,13 @@ export const fetchUsersStart = () => {
     }
 }
 
-export const fetchUsers = () => {
+export const fetchUsers = (token) => {
     return dispatch => {
         dispatch(fetchUsersStart())
-        axios.get('/users')
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        axios.get('/users', {headers})
         .then(response => {
             const users = response.data
             const updatedUsers = users.map(

@@ -79,7 +79,8 @@ class NewPost extends Component {
     submitClicked = (event) => {
         event.preventDefault();
         // this.setState({loading: true})
-
+        console.log("xyzawqeer;")
+        console.log(this.props.token)
         const formData = {}
 
         for (let formElementIdentifier in this.state.newPost) {
@@ -87,7 +88,7 @@ class NewPost extends Component {
         }
 
         const newPost = formData
-        this.props.onSubmitPost(this.props.username, newPost)
+        this.props.onSubmitPost(this.props.username, newPost, this.props.token)
     }
 
     render() {
@@ -151,12 +152,13 @@ const mapStateToProps = state => {
         loading: state.post.loading,
         submitted: state.post.submitted,
         isAuth: state.auth.token !== null,
-        username: state.auth.username
+        username: state.auth.username,
+        token: state.auth.token
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onSubmitPost: (username, postData) => dispatch(actions.submitPost(username, postData))
+        onSubmitPost: (username, postData, token) => dispatch(actions.submitPost(username, postData, token))
     }
 }
 
