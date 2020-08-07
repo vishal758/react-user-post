@@ -172,3 +172,39 @@ export const editPost = (username, postId, editData, token) => {
             })
     }
 }
+
+export const deletePostSuccess = () => {
+    return {
+        type: actionTypes.DELETE_POST_SUCCESS
+    }
+}
+
+export const deletePostFail = (err) => {
+    return {
+        type: actionTypes.DELETE_POST_FAIL,
+        error: err
+    }
+}
+
+export const deletePostStart = () => {
+    return {
+        type: actionTypes.DELETE_POST_START
+    }
+}
+
+export const deletePost = (postId, username, token) => {
+    return dispatch => {
+        dispatch(deletePostStart())
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        console.log("delete post action", headers)
+        axios.delete("/users/" + username + "/posts/" + postId, {headers})
+            .then(response => {
+                dispatch(deletePostSuccess())
+            })
+            .catch(err => {
+                dispatch(deletePostFail(err))
+            })
+    }
+}

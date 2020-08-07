@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Post.module.css';
 import classes from './Post.module.css'
-import img from '../../assets/images/img.jpg'
+import img1 from '../../assets/images/img1.jpg'
 import { Link } from 'react-router-dom'
 const post = (props) => {
 
@@ -10,7 +10,7 @@ const post = (props) => {
         <article>
                 <div className={classes.BlogCard}>
                     <div className={classes.Meta}>
-                        <div className={classes.Photo} style={{backgroundImage: "url(" + img +")"}}></div>
+                        <div className={classes.Photo} style={{backgroundImage: "url(" + img1 +")"}}></div>
                     </div>
                     <div className={classes.Description}>
                         <h1>{props.title}</h1>

@@ -7,7 +7,8 @@ const initialState = {
     loading: false,
     error: null,
     fullPost: null,
-    postEdited: false
+    postEdited: false,
+    postDeleted: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -33,7 +34,8 @@ const reducer = (state = initialState, action) => {
                 loading: false,
                 submitted: false,
                 fullPost: null,
-                postEdited: false
+                postEdited: false,
+                postDeleted: false
             })
         case actionTypes.FETCH_FULLPOST_START:
             return updateObject(state, {loading: true})
@@ -47,14 +49,24 @@ const reducer = (state = initialState, action) => {
             case actionTypes.EDIT_POST_START:
                 return updateObject(state, {loading: true, postEdited: false})
             case actionTypes.EDIT_POST_FAIL:
-                return updateObject(state, {loading: false, error: null, postEdited: false})
+                return updateObject(state, {loading: false, error: action.error, postEdited: false})
             case actionTypes.EDIT_POST_SUCCESS:
                 return updateObject(state, {
                     loading: false, 
                     error: null,
                     postEdited: true
                 })
-        
+                case actionTypes.DELETE_POST_START:
+                    return updateObject(state, {loading: true, postDeleted: false})
+                case actionTypes.DELETE_POST_FAIL:
+                    return updateObject(state, {loading: false, error: action.error})
+                case actionTypes.DELETE_POST_SUCCESS:
+                    return updateObject(state, {
+                        error: null, 
+                        loading: false, 
+                        fullPost: null,
+                        postDeleted: true
+                    })
         default:
             return state
     }
