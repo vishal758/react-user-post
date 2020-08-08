@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import classes from './FullPost.module.css'
 import Aux from '../../hoc/Aux/Aux'
-import img from '../../assets/images/img.jpg'
+import img from '../../assets/images/img1.jpg'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux'
 import ModalAction from '../NewPost/ModalAction/ModalAction'
 import Modal from '../../components/UI/Modal/Modal'
 import { Redirect } from 'react-router'
+import Button from '../../components/UI/Button/Button'
 
 class FullPost extends Component {
 
@@ -16,19 +17,20 @@ class FullPost extends Component {
     }
 
     componentDidMount() {
+        console.log("[fullpost props]:", this.props)
         console.log("[FullPost] token: ", this.props.token)
         if(this.props.match.params.id && !this.props.isPostDeleted) {
             if(!this.props.loadedPost || (this.props.loadedPost && this.props.loadedPost.id !== this.props.match.params.id)) {
-                this.props.onFetchFullPost(this.props.match.params.id, this.props.token)
+                this.props.onFetchFullPost(this.props.match.params.id, this.props.match.params.username, this.props.token)
             }
         }
     }
 
     componentDidUpdate() {
-        if(this.props.match.params.id) {
+        if(this.props.match.params.id && this.props.match.params.username) {
             if(this.props.isPostDeleted) return;
             if(!this.props.loadedPost || (this.props.loadedPost && this.props.loadedPost.id !== this.props.match.params.id)) {
-                this.props.onFetchFullPost(this.props.match.params.id, this.props.token)
+                this.props.onFetchFullPost(this.props.match.params.id, this.props.match.params.username, this.props.token)
             }
         }
     }
@@ -92,17 +94,17 @@ class FullPost extends Component {
                                 </div>
                                 
                             </div>
-                            <div className={classes.Button}> 
+                            <div className={classes.Button}>
                                 {
                                     this.props.loggedInUsername === this.props.loadedPost.author
-                                        ? <button onClick={this.editHandler}>Edit</button>
-                                        : null                                          
-                                }
-                                {
-                                    this.props.loggedInUsername === this.props.loadedPost.author
-                                    ? <button className={classes.Danger} onClick={this.deleteContinue}>Delete</button>
+                                    ? <Button btnType="Danger" className={classes.Danger} clicked={this.deleteContinue}>Delete</Button>
                                     : null
                                 }
+                                {
+                                    this.props.loggedInUsername === this.props.loadedPost.author
+                                        ? <Button btnType = "Success" clicked={this.editHandler}>Edit</Button>
+                                        : null                                          
+                                }                                
                             </div>
                         </div>
                     </article>
@@ -152,7 +154,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchFullPost: (postId, token) => dispatch(actions.fetchFullPost(postId, token)),
+        onFetchFullPost: (postId, username, token) => dispatch(actions.fetchFullPost(postId, username, token)),
         onDeletePost: (postId, author, token) => dispatch(actions.deletePost(postId, author, token))
     }
 }

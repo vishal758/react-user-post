@@ -104,24 +104,10 @@
 }
 
 
-.FullPost .Button {
-    display: flex;
-    /* flex-flow: row; */
-    flex-direction: row;
-    justify-content: center;
-    width: 20%;
-    height: 40px;
-    font-size: 1em;
-    position: relative;
-    /* max-width: 800px; */
-
+ .Button {
+    display:flex;
     text-align: center;
-    align-items: center;
-    margin: 0 auto;
+    flex-flow: row;
+    vertical-align: center;
     
-    /* margin: 0 50%; */
-}
-
-.FullPost .Button .Danger {
-    background-color: #944317;
 }

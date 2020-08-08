@@ -68,7 +68,7 @@ export const fetchPosts = () => {
         axios.get("/allPosts")
         // axios.get("https://burger-react-app-50038.firebaseio.com/post.json")
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             const posts = response.data
             const updatedPosts = posts.map(                
                 post => {
@@ -82,14 +82,10 @@ export const fetchPosts = () => {
                     }
                 }
             )
-            dispatch(fetchPostsSuccess(updatedPosts))
-            // console.log("updatedposts: " + updatedPosts)
-            // this.setState({posts: updatedPosts, loading: false})
+            dispatch(fetchPostsSuccess(updatedPosts))           
         })
         .catch(error => {
-            // console.log(error)
             dispatch(fetchPostsFail(error))
-            // this.setState({loading: false})
         })
     }
 }
@@ -114,22 +110,56 @@ export const fetchFullPostStart = () => {
     }
 }
 
-export const fetchFullPost = (id, token) => {
+export const fetchFullPost = (id, username, token) => {
     return dispatch => {
         dispatch(fetchFullPostStart())
         
         let headers = {
             'Authorization': 'Bearer ' + token
         }
-        axios.get('/allPosts/' + id, {headers})
+        axios.get('/users/' + username + '/posts/' + id, {headers})
             .then(response => {
                 dispatch(fetchFullPostSuccess(response.data))
-                // this.setState({loadedPost: response.data, loading: false})
             })
             .catch(error => {
                 dispatch(fetchFullPostFail(error))
-                // console.log(error)
-                // this.setState({loading: false})
+            })
+    }
+}
+
+export const fetchParticularUserPostsSucess = (posts) => {
+    return {
+        type: actionTypes.FETCH_PARTICULAR_USERS_POSTSSUCCESS,
+        userPosts: posts
+    }
+}
+
+export const fetchParticularUserPostsFail = (err) => {
+    return {
+        type: actionTypes.FETCH_PARTICULAR_USERS_POSTS_FAIL,
+        error: err
+    }
+}
+
+export const fetchParticularUserPostsStart = () => {
+    return {
+        type: actionTypes.FETCH_PARTICULAR_USERS_POSTS_START
+    }
+}
+
+export const fetchParticularUserPosts = (username, token) => {
+    return dispatch => {
+        dispatch(fetchParticularUserPostsStart())
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        console.log(headers)
+        axios.get('/users/' + username + '/posts', {headers})
+            .then(response => {
+                dispatch(fetchParticularUserPostsSucess(response.data))
+            })
+            .catch(error => {
+                dispatch(fetchParticularUserPostsFail(error))                
             })
     }
 }

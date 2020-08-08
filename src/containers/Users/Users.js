@@ -15,6 +15,10 @@ class Users extends Component {
         this.props.onFetchUsers(this.props.token)
     }   
 
+    particularUserPostsHandler = (username) => {
+        if(this.props.isAuth)
+            this.props.history.push('/users/' + username + '/posts')
+    }
     render() {
         let users = <p>Something went wrong</p>
         if(this.props.users) {
@@ -28,6 +32,7 @@ class Users extends Component {
                                 email = {user.email}
                                 role = {user.role}
                                 userProfileData = {user.userProfileData}
+                                clicked={() => this.particularUserPostsHandler(user.username)}
                             // clicked = {() => this.userSelectedHandler(user.id)}
                             />
                         // </Link>

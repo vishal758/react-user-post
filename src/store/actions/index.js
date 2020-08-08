@@ -3,7 +3,8 @@ export {
     fetchPosts,
     fetchFullPost,
     editPost,
-    deletePost
+    deletePost,
+    fetchParticularUserPosts
 } from './post'
 
 export {

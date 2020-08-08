@@ -24,7 +24,7 @@ const user = (props) => {
                         <a href><FontAwesomeIcon icon = {faTwitter} size="sm"/></a>
                         <a href><FontAwesomeIcon icon = {faFacebook} size="sm"/></a>                        
                     </div>
-                    <p><button>Contact</button></p>
+                    <p><button onClick={props.clicked}>See Posts</button></p>
                 </div>
             
             </div>

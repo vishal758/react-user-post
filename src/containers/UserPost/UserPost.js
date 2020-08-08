@@ -10,6 +10,7 @@ import Logout from '../Administration/Logout/Logout'
 import EditPost from '../NewPost/EditPost/EditPost'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
+import ParticularUserPosts from '../Posts/ParticularUserPosts/ParticularUserPosts'
 
 class UserPost extends Component {
     componentDidMount() {
@@ -25,8 +26,9 @@ class UserPost extends Component {
                     <Route path="/logout" component = {Logout} />
                     <Route path="/allPosts" exact component={Posts} />
                     <Route path="/newPost" component = {NewPost}/>
-                    <Route path="/allPosts/:id/edit" component = {EditPost} />
-                    <Route path="/allPosts/:id" component = {FullPost} />
+                    <Route path="/users/:username/posts/:id/edit" component = {EditPost} />
+                    <Route path="/users/:username/posts/:id" component = {FullPost} />
+                    <Route path="/users/:username/posts" component = {ParticularUserPosts}/>
                     <Route path="/users" component = {Users} />
                 </Switch>                
             </div>
