@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8081/api/auth'
+    // baseURL: 'http://localhost:8081/api/auth'
+    baseURL: 'https://blogapp758.herokuapp.com/api/auth'
 })
 
 instance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
