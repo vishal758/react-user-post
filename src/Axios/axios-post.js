@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const instance = axios.create({
     // baseURL: 'http://localhost:8081'
-    baseURL: 'https://blogapp758.herokuapp.com'
+    baseURL: 'https://blogappservice758.herokuapp.com/'
 })
 
 // const token = localStorage.getItem('token')
