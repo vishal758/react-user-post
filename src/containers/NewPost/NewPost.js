@@ -8,6 +8,8 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
 import { Redirect } from 'react-router'
+import ModalAction from './ModalAction/ModalAction'
+import Modal from '../../components/UI/Modal/Modal'
 
 class NewPost extends Component {
 
@@ -90,6 +92,10 @@ class NewPost extends Component {
         const newPost = formData
         this.props.onSubmitPost(this.props.username, newPost, this.props.token)
     }
+    
+    cancelHandler = () => {
+        this.props.history.push('/allPosts')
+    }
 
     render() {
 
@@ -129,13 +135,22 @@ class NewPost extends Component {
         if(!this.props.isAuth) {
             redirectNewPost = <Redirect to="/signin" />
         }
-        
-        const submittedRedirect = this.props.submitted ? <Redirect to="/allPosts" /> : null
+        let submittedRedirect = null
+        if(this.props.submitted) {
+            submittedRedirect = <ModalAction 
+                message = "Post submitted sucessfully."
+                actionCancelled={this.cancelHandler}
+                mess = "CONTINUE"
+                actionConfirmed={this.cancelHandler} />
+        }
+        // const submittedRedirect = this.props.submitted ? <Redirect to="/allPosts" /> : null
 
         return (
             <Aux>
                 {redirectNewPost}
-                {submittedRedirect}
+                <Modal show = {this.props.submitted} modalClosed={this.cancelHandler}>
+                        {submittedRedirect}
+                </Modal>
                 <div className={classes.Print}>
                     <h3 className={classes.Center}>CREATE A POST <FontAwesomeIcon icon={faTwitter} size="sm" /></h3>
                 </div>

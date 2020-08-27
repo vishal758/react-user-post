@@ -111,3 +111,15 @@
     vertical-align: center;
     
 }
+
+@media (max-width: 700px) {
+    .Container {
+        width: 80%;
+    }
+}
+
+@media (max-width: 500px) {
+    .Container {
+        width: 100%;
+    }
+}

@@ -115,6 +115,7 @@ class FullPost extends Component {
                 deletePost = <ModalAction 
                     message = "Confirm Deleting the Post"
                     actionCancelled={this.deleteCancelHandler}
+                    mess = "CONTINUE"
                     actionConfirmed={this.deleteConfirmHandler} />
             }
             // console.log(post)

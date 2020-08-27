@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import * as actions from '../../../store/actions/index'
 import { Redirect } from 'react-router'
+import ModalAction from '../ModalAction/ModalAction'
+import Modal from '../../../components/UI/Modal/Modal'
 
 class EditPost extends Component {
 
@@ -107,6 +109,10 @@ class EditPost extends Component {
         this.props.onEditPost(this.props.editPostData.author, this.props.editPostData.id, editPost, this.props.token)
     }
 
+    cancelHandler = () => {
+        this.props.history.push('/allPosts')
+    }
+
     render() {
         console.log("mount render edit", this.state.editPost)
         const formElementArray = []
@@ -149,14 +155,21 @@ class EditPost extends Component {
             redirectEdit = <Redirect to="/signin" />
         } else {
             if(this.props.editSuccess) {
-                let url = '/allPosts/';
-                redirectEdit = <Redirect to={url}  />
+                // let url = '/allPosts/';
+                redirectEdit = <ModalAction 
+                    message = "Post modified sucessfully."
+                    actionCancelled={this.cancelHandler}
+                    mess = "CONTINUE"
+                    actionConfirmed={this.cancelHandler} />
+                // redirectEdit = <Redirect to={url}  />
             }
         }
 
         return (
             <Aux>
-                {redirectEdit}
+                <Modal show = {this.props.editSuccess} modalClosed={this.cancelHandler}>
+                        {redirectEdit}
+                </Modal>
                 <div className={classes.Print}>
                     <h3 className={classes.Center}>Edit A POST <FontAwesomeIcon icon={faTwitter} size="sm" /></h3>
                 </div>

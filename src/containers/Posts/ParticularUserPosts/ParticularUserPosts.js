@@ -5,6 +5,8 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 import Post from '../../../components/Post/Post'
 import classes from './ParticularUserPosts.module.css'
 import Aux from '../../../hoc/Aux/Aux'
+import ModalAction from '../../NewPost/ModalAction/ModalAction'
+import Modal from '../../../components/UI/Modal/Modal'
 
 class ParticularUserPosts extends Component {
 
@@ -20,11 +22,14 @@ class ParticularUserPosts extends Component {
             this.props.history.push("/signin")
         }
     }
+    cancelHandler = () => {
+        this.props.history.push('/users')
+    }
     render() {
-        let posts = <p>Something went wrong</p>
+        let posts = <p style={{textAlign: 'center'}}>No Posts from this user.</p>
         if(this.props.loading)
             posts = <Spinner />
-        if(this.props.posts) {
+        if(Array.isArray(this.props.posts) && this.props.posts) {
             posts = this.props.posts.map(
                 post => {
                     return (
@@ -42,8 +47,20 @@ class ParticularUserPosts extends Component {
                 }
             )
         }
+        let showModal = null, show = false
+        if(!Array.isArray(this.props.posts)) {
+                show = true
+                showModal = <ModalAction 
+                    message = "No Post from this user."
+                    actionCancelled={this.cancelHandler}
+                    mess = "CONTINUE"
+                    actionConfirmed={this.cancelHandler} />
+        }
         return (
             <Aux>
+                <Modal show = {show} modalClosed={this.cancelHandler}>
+                        {showModal}
+                </Modal>
             <section className={classes.Posts}>
                 {posts}
             </section>

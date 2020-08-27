@@ -9,7 +9,7 @@ class ModalAction extends Component {
                 <span></span>
                 <div className={classes.But}>
                     <button className={[classes.Button, classes.Danger].join(' ')} onClick={this.props.actionCancelled}>CANCEL</button>
-                    <button className={[classes.Button, classes.Success].join(' ')} onClick={this.props.actionConfirmed}>SUBMIT</button>
+                    <button className={[classes.Button, classes.Success].join(' ')} onClick={this.props.actionConfirmed}>{this.props.mess}</button>
                 </div>
                 
             </div>                
