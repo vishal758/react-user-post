@@ -9,6 +9,7 @@ import ModalAction from '../NewPost/ModalAction/ModalAction'
 import Modal from '../../components/UI/Modal/Modal'
 import { Redirect } from 'react-router'
 import Button from '../../components/UI/Button/Button'
+import Comment from './Comment/Comment'
 
 class FullPost extends Component {
 
@@ -106,7 +107,11 @@ class FullPost extends Component {
                                         : null                                          
                                 }                                
                             </div>
+                            <div>
+                                <Comment />
+                            </div>
                         </div>
+                        
                     </article>
                 </Aux>
             )
