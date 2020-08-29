@@ -56,18 +56,9 @@ class FullPost extends Component {
     }
 
     render() {
-        // console.log(this.props.loading)
         let post = <p style={{textAlign: 'center'}}>Please select a Post!</p>;
-        // if(this.props.id) {
-        //     post = <p style={{textAlign: 'center'}}>Loading...</p>;
-        // }
-        // console.log("successful sign: ", this.props.isAuth)
-        // let redirectSignIn = null
-        // if(!this.props.isAuth) {
-        //     redirectSignIn = <Redirect to = "/signin" />
-        // }
 
-        if(this.props.loading ) {
+        if(this.props.loading && this.props.isAuth) {
             post = <Spinner />
         }
         
@@ -108,7 +99,10 @@ class FullPost extends Component {
                                 }                                
                             </div>
                             <div>
-                                <Comments comments = {this.props.loadedPost.comments}/>
+                                <Comments 
+                                    comments = {this.props.loadedPost.comments}
+                                    postId = {this.props.loadedPost.id} 
+                                    postOwner = {this.props.loadedPost.author}/>
                             </div>
                         </div>
                         

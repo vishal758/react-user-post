@@ -18,3 +18,8 @@ export {
     setAuthRedirectPath,
     authCheckState
 } from './auth'
+
+export {
+    submitComment,
+    deleteComment
+} from './comment'

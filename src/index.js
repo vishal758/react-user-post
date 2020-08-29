@@ -10,11 +10,13 @@ import thunk from 'redux-thunk'
 import postReducer from './store/reducers/post'
 import userReducer from './store/reducers/user'
 import authReducer from './store/reducers/auth'
+import commentReducer from './store/reducers/comment'
 
 const rootReducer = combineReducers({
   post: postReducer,
   user: userReducer,
-  auth: authReducer
+  auth: authReducer,
+  comment: commentReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

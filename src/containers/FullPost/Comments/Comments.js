@@ -4,12 +4,13 @@ import Aux from '../../../hoc/Aux/Aux'
 import Input from '../../../components/UI/Input/Input'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Comment from '../../../components/Comment/Comment'
-
+import { connect } from 'react-redux'
+import * as actions from '../../../store/actions/index'
 
 class Comments extends Component {
     state = {
         comment: {
-            desc: {
+            message: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
@@ -23,7 +24,8 @@ class Comments extends Component {
                 touched: false
             }
         },
-        formIsValid: false
+        formIsValid: false,
+        submitted: false
     }
 
     checkValidity(value, rules) {
@@ -59,6 +61,23 @@ class Comments extends Component {
         this.setState({comment: updatedCommentForm, formIsValid: formIsValid})
     }
 
+    submitClicked = (event) => {
+        event.preventDefault()
+
+        const formData = {}
+
+        for (let formElementIdentifier in this.state.comment) {
+            formData[formElementIdentifier] = this.state.comment[formElementIdentifier].value
+        }
+
+        formData['commentBy'] = this.props.loggedInuser
+
+        this.props.onSubmitComment(this.props.postOwner, this.props.postId, formData, this.props.token)
+    }
+
+    deleteCommentHandler = (commentId) => {
+        this.props.onDeleteComment(this.props.postOwner, this.props.postId, commentId, this.props.token)
+    }
     render() {
         const formElementArray = []
         for(let key in this.state.comment) {
@@ -103,16 +122,20 @@ class Comments extends Component {
                         key = {comment.id}
                         author = {comment.commentBy}
                         message = {comment.message}
+                        loggedInuser = {this.props.loggedInuser}
+                        deleteClicked = {() => this.deleteCommentHandler(comment.id)}
                         />
                     )
                 }
             )
         }
 
+        if(this.props.commentSubmitted || this.props.commentDeleted) 
+            window.location.reload()    
         return (
             <Aux>
                 <div className={classes.Comment}>
-                    <h1>This is comment section.</h1>
+                    <h1>Comments section</h1>
                     {form}
                     {userComments}
                 </div>
@@ -122,4 +145,20 @@ class Comments extends Component {
     }
 }
 
-export default Comments
+const mapStateToProps = state => {
+    return {
+        loggedInuser: state.auth.username,
+        token: state.auth.token,
+        commentSubmitted: state.comment.commentSubmitted,
+        commentDeleted: state.comment.commentDeleted
+    }
+}
+
+const mapDisPatchToProps = dispatch => {
+    return {
+        onSubmitComment: (username, postId, commentData, token) => dispatch(actions.submitComment(username, postId, commentData, token)),
+        onDeleteComment: (username, postId, commentId, token) => dispatch(actions.deleteComment(username, postId, commentId, token))
+    }
+}
+
+export default connect(mapStateToProps, mapDisPatchToProps)(Comments)

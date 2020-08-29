@@ -11,12 +11,15 @@ const comment = (props) => {
                 <label>{props.author}</label>
                 <p>{props.message}</p>
                 <div className={classes.Button}>
-                    <Button btnType="Danger" className={classes.Danger}>Delete</Button>
-                    <Button btnType="Success" className={classes.Danger}>Edit</Button>
+                    
+                    {props.loggedInuser === props.author ? <Button btnType="Danger" className={classes.Danger} clicked = {props.deleteClicked}>Delete</Button> : null}
+                    {/* {props.loggedInuser === props.author ? <Button btnType="Success" className={classes.Sucess}>Edit</Button> : null} */}
                 </div>
             </div>
         </article>
     )
 };
+
+
 
 export default comment;
