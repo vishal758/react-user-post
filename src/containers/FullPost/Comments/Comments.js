@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import classes from './Comment.module.css'
+import classes from './Comments.module.css'
 import Aux from '../../../hoc/Aux/Aux'
 import Input from '../../../components/UI/Input/Input'
 import Spinner from '../../../components/UI/Spinner/Spinner'
+import Comment from '../../../components/Comment/Comment'
 
-class Comment extends Component {
+
+class Comments extends Component {
     state = {
         comment: {
             desc: {
@@ -91,12 +93,28 @@ class Comment extends Component {
             form = <Spinner />
         }
 
+        let userComments = null
+        
+        if(this.props.comments.length) {
+            userComments = this.props.comments.map(
+                comment => {
+                    return (
+                        <Comment 
+                        key = {comment.id}
+                        author = {comment.commentBy}
+                        message = {comment.message}
+                        />
+                    )
+                }
+            )
+        }
 
         return (
             <Aux>
                 <div className={classes.Comment}>
                     <h1>This is comment section.</h1>
                     {form}
+                    {userComments}
                 </div>
 
             </Aux>
@@ -104,4 +122,4 @@ class Comment extends Component {
     }
 }
 
-export default Comment
+export default Comments

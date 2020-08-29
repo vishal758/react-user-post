@@ -9,7 +9,7 @@ import ModalAction from '../NewPost/ModalAction/ModalAction'
 import Modal from '../../components/UI/Modal/Modal'
 import { Redirect } from 'react-router'
 import Button from '../../components/UI/Button/Button'
-import Comment from './Comment/Comment'
+import Comments from './Comments/Comments'
 
 class FullPost extends Component {
 
@@ -108,7 +108,7 @@ class FullPost extends Component {
                                 }                                
                             </div>
                             <div>
-                                <Comment />
+                                <Comments comments = {this.props.loadedPost.comments}/>
                             </div>
                         </div>
                         
