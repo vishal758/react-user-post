@@ -26,8 +26,10 @@
 
     .User .Title {
       color: grey;
-      font-size: 18px;
+      font-size: inherit;
+      overflow-wrap: break-word;
       margin: auto;
+      box-sizing: border-box;
     }
     
     .User button {

@@ -16,8 +16,8 @@ const user = (props) => {
                 </div>
                 <div className={classes.Cont}>
                     <h1>{props.username}</h1>
-                    <p className={classes.Title}>CEO and Founder, Example</p>
-                    <p>Harvard University</p>
+                    <p className={classes.Title}>{props.email}</p>
+                    <p>Software Developer</p>
                     <div style={{margin: 'auto'}}>
                         <a href><FontAwesomeIcon icon = {faLinkedin} size="sm"/></a>
                         <a href><FontAwesomeIcon icon = {faGithub} size="sm"/></a>
