@@ -18,7 +18,7 @@ const user = (props) => {
                     <h1>{props.username}</h1>
                     <p className={classes.Title}>CEO and Founder, Example</p>
                     <p>Harvard University</p>
-                    <div style={{margin: '24px 0'}}>
+                    <div style={{margin: 'auto'}}>
                         <a href><FontAwesomeIcon icon = {faLinkedin} size="sm"/></a>
                         <a href><FontAwesomeIcon icon = {faGithub} size="sm"/></a>
                         <a href><FontAwesomeIcon icon = {faTwitter} size="sm"/></a>
