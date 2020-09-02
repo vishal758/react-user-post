@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import userLogo from '../../assets/images/user-icon.jpg'
 import { faLinkedin, faGithub, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
 import classes from './User.module.css'
 
@@ -12,7 +12,8 @@ const user = (props) => {
 
             <div className={classes.User}>
                 <div className={classes.Image}>
-                    <img src="https://randomuser.me/api/portraits/women/79.jpg" alt="John" />
+                    {/* <img src="https://randomuser.me/api/portraits/women/79.jpg" alt="John" /> */}
+                    <img src={userLogo} alt="John" />
                 </div>
                 <div className={classes.Cont}>
                     <h1>{props.username}</h1>

@@ -59,9 +59,9 @@ input[type=text], select{
     margin: 100px 0 40px 0;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 800px) {
     .Container {
-      width: 60%;
+      width: 50%;
     }
   }
 

@@ -122,12 +122,24 @@
     @media (min-width: 900px) {
         .User {
             height: 200px;
-            width: 50%;
+            width: 30%;
         }
 
         .User .Cont {
           justify-content: center;
         }
 
+        .User .Image {
+          width: 0%;
+          }
+          .User .Image img{
+          width: 100%;
+          height: 100%;
+          }
+    }
 
+    @media (min-width: 650px) {
+      .User .Image {
+        width: 0%;
+        }
     }
