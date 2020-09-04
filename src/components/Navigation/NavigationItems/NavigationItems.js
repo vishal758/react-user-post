@@ -17,6 +17,11 @@ const NavigationItems = props => {
                     : null
             }
             {
+                props.isAuthenticated
+                    ? <NavigationItem link={'/users/' + props.loggedInUser + '/posts'}>My Posts</NavigationItem>
+                    : null
+            }
+            {
                 !props.isAuthenticated
                     ? <NavigationItem link="/signin"> SignIn </NavigationItem>
                     : <NavigationItem link="/logout"> Logout </NavigationItem>

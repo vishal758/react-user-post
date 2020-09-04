@@ -14,3 +14,9 @@
         flex-flow: row;
     }
 }
+
+@media(max-width: 660px) {
+    .NavigationItems {
+        font-size: small;
+    }
+}

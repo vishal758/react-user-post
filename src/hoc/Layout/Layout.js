@@ -21,12 +21,16 @@ class Layout extends Component {
     }
 
     render() {
+        console.log("loggeinuser: ", this.props.loggedInUser)
+        const logUser = this.props.loggedInUser
         return (
             <Aux>
                 <Toolbar 
                     isAuth = {this.props.isAuthenticated}
+                    loggedUser = {logUser}
                     open = {this.state.showSideDrawer} drawerToggleClicked = {this.sideDrawerToggleHandler}/>
                 <SideDrawer 
+                    loggedUser = {logUser}
                     isAuth = {this.props.isAuthenticated}
                     open = {this.state.showSideDrawer}
                     closed = {this.sideDrawerCloseHandler}/>
@@ -40,7 +44,8 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
     return {
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        loggedInUser: state.auth.username
     }
 }
 

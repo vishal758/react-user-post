@@ -4,6 +4,7 @@
     box-sizing: border-box;
     display: block;
     width: 100%;
+    padding: 0;
 }
 
 .NavigationItem a {
@@ -11,6 +12,7 @@
     text-decoration: none;
     width: 100%;
     font-size: 1.4em;
+    padding: 0;
     box-sizing: border-box;
     display: block;
 }
@@ -30,6 +32,7 @@
         height: 100%;
         width: auto;
         align-items: center;
+        padding: 0;
     
     }
     
@@ -47,4 +50,12 @@
         color: black;
     }
     
+}
+
+@media(max-width: 600px) {
+    .NavigationItem a {
+
+        padding: auto 4px;
+        font-size: 1.25em;
+    }
 }

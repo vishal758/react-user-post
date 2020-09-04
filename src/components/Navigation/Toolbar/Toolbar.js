@@ -13,7 +13,9 @@ const Toolbar = props => {
                     <Logo />
                 </div>
                 <nav className={classes.DesktopOnly}>
-                    <NavigationItems isAuthenticated = {props.isAuth} />
+                    <NavigationItems 
+                        loggedInUser = {props.loggedUser}
+                        isAuthenticated = {props.isAuth} />
                 </nav>
             </header>
         </Aux>

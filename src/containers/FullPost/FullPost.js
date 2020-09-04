@@ -10,11 +10,13 @@ import Modal from '../../components/UI/Modal/Modal'
 import { Redirect } from 'react-router'
 import Button from '../../components/UI/Button/Button'
 import Comments from './Comments/Comments'
+import axios from 'axios'
 
 class FullPost extends Component {
 
     state = {
-        isDeletePost: false
+        isDeletePost: false,
+        img: null
     }
 
     componentDidMount() {
@@ -25,6 +27,19 @@ class FullPost extends Component {
                 this.props.onFetchFullPost(this.props.match.params.id, this.props.match.params.username, this.props.token)
             }
         }
+
+        axios.get('https://api.unsplash.com/photos/random?client_id=' + 'abcdef')
+        .then(res => {
+            console.log("re->data",res.url)
+            this.setState({img: res.url})
+        })
+        // .then(res => res.json())
+        // .then(data => {
+        //     this.setState({ imgs: data });
+        // })
+        .catch(err => {
+            console.log('Error happened during fetching!', err);
+        });
     }
 
     componentDidUpdate() {
