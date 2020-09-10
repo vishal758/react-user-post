@@ -13,7 +13,7 @@ const SideDrawer = (props) => {
     }
     return (
         <Aux>
-            {console.log("side drawer:", props.loggedUser)}
+            {/* {console.log("side drawer:", props.loggedUser)} */}
             <Backdrop show = {props.open} clicked = {props.closed}/>
             <div className={attachedClasses.join(' ')}>
                 <div className={classes.Logo}>

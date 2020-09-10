@@ -26,7 +26,6 @@ export const submitComment = (username, postId, commentData, token) => {
         let headers = {
             'Authorization': 'Bearer ' + token
         }
-        // console.log('comments req. body, ', commentData)
         axios.post('/users/' + username + '/posts/' + postId + '/comments', commentData, {headers})
         .then(response => {
             dispatch(submitCommentSuccess())

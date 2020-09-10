@@ -14,7 +14,6 @@ import Modal from '../../../components/UI/Modal/Modal'
 class EditPost extends Component {
 
     componentDidMount() {
-        console.log("mount state edit:", this.state.editPost)
         const updatedEditPostForm = {
             ...this.state.editPost
         }
@@ -114,7 +113,7 @@ class EditPost extends Component {
     }
 
     render() {
-        console.log("mount render edit", this.state.editPost)
+        // console.log("mount render edit", this.state.editPost)
         const formElementArray = []
         for(let key in this.state.editPost) {
             formElementArray.push({
@@ -123,7 +122,7 @@ class EditPost extends Component {
             })
         }
         
-        console.log('formElementArray', formElementArray)
+        // console.log('formElementArray', formElementArray)
         let form = (
             <form className={classes.Container} onSubmit={this.submitClicked}>
                 {

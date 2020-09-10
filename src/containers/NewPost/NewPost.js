@@ -81,8 +81,6 @@ class NewPost extends Component {
     submitClicked = (event) => {
         event.preventDefault();
         // this.setState({loading: true})
-        console.log("xyzawqeer;")
-        console.log(this.props.token)
         const formData = {}
 
         for (let formElementIdentifier in this.state.newPost) {

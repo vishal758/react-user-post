@@ -14,7 +14,7 @@ class Posts extends Component {
     }
 
     componentDidMount () {
-        console.log("posts")
+        // console.log("posts")
         this.props.onFetchPosts()
     }
 
@@ -31,9 +31,7 @@ class Posts extends Component {
     }
 
     render() {
-        // console.log("selected id: " + this.state.selectedPostId)
         let posts = <p>Something went wrong</p>
-        console.log(this.props.loading)
         if(this.props.loading)
             posts = <Spinner />
         if(this.props.posts) {

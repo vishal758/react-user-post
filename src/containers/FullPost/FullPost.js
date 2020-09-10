@@ -10,36 +10,27 @@ import Modal from '../../components/UI/Modal/Modal'
 import { Redirect } from 'react-router'
 import Button from '../../components/UI/Button/Button'
 import Comments from './Comments/Comments'
-import axios from 'axios'
+
+import { Bookmark, BookmarkBorder } from '@material-ui/icons'
+
 
 class FullPost extends Component {
 
     state = {
         isDeletePost: false,
-        img: null
+        img: null,
     }
 
     componentDidMount() {
-        console.log("[fullpost props]:", this.props)
-        console.log("[FullPost] token: ", this.props.token)
+        // console.log("[fullpost props]:", this.props)
+        // console.log("[FullPost] token: ", this.props.token)
         if(this.props.match.params.id && !this.props.isPostDeleted) {
             if(!this.props.loadedPost || (this.props.loadedPost && this.props.loadedPost.id !== this.props.match.params.id)) {
                 this.props.onFetchFullPost(this.props.match.params.id, this.props.match.params.username, this.props.token)
             }
         }
 
-        axios.get('https://api.unsplash.com/photos/random?client_id=' + 'abcdef')
-        .then(res => {
-            console.log("re->data",res.url)
-            this.setState({img: res.url})
-        })
-        // .then(res => res.json())
-        // .then(data => {
-        //     this.setState({ imgs: data });
-        // })
-        .catch(err => {
-            console.log('Error happened during fetching!', err);
-        });
+        this.props.onIsFavPost(this.props.token, this.props.loggedInUsername, this.props.match.params.id)
     }
 
     componentDidUpdate() {
@@ -47,12 +38,12 @@ class FullPost extends Component {
             if(this.props.isPostDeleted) return;
             if(!this.props.loadedPost || (this.props.loadedPost && this.props.loadedPost.id !== this.props.match.params.id)) {
                 this.props.onFetchFullPost(this.props.match.params.id, this.props.match.params.username, this.props.token)
+                this.props.onIsFavPost(this.props.token, this.props.loggedInUsername, this.props.match.params.id)
             }
         }
     }
     
     editHandler = () => {
-        console.log(this.props)
         this.props.history.push(this.props.match.url + '/edit')
         // this.props.history.push('/' + '/edit')
     }
@@ -62,12 +53,16 @@ class FullPost extends Component {
     }
     deleteConfirmHandler = () => {
         this.setState({isDeletePost: false})
-        console.log(this.props)
         this.props.onDeletePost(this.props.match.params.id, this.props.loadedPost.author, this.props.token)
     }
 
     deleteContinue = () => {
         this.setState({isDeletePost: true})
+    }
+
+    addOrRemoveFromFavPosts = () => {
+        let isFav = this.props.favFlag ? true: false
+        this.props.onFavPost(this.props.token, this.props.loggedInUsername, this.props.match.params.id, isFav)
     }
 
     render() {
@@ -80,7 +75,7 @@ class FullPost extends Component {
         let deletePost = null
 
         if(this.props.loadedPost) {
-            console.log(this.props.loadedPost)
+            // console.log(this.props.loadedPost)
             post = (
                 <Aux>
                     <article className={classes.Container}>
@@ -90,10 +85,17 @@ class FullPost extends Component {
                             </div>
                             <div>
                                 <div className={classes.Title}>
-                                    <h1>{this.props.loadedPost.title}</h1>
+                                    <h1>{this.props.loadedPost.title}</h1>                                   
                                 </div>
                                 <div className={classes.Description}>
-                                    <h2>Author: {this.props.loadedPost.author}</h2>
+                                 
+                                    <h2>Author: {this.props.loadedPost.author} &nbsp;    
+                                    
+                                        <div className={classes.SaveIcon} onClick={this.addOrRemoveFromFavPosts}>
+                                        {this.props.favFlag === true ? <Bookmark /> : <BookmarkBorder />}
+                                        </div>
+                                    
+                                    </h2>
                                     <p>{this.props.loadedPost.desc}</p>
                                     <div>
                                     <h3>Last Modified At: {this.props.loadedPost.lastModifiedDate}</h3>
@@ -163,14 +165,17 @@ const mapStateToProps = state => {
         token: state.auth.token,
         isAuth: state.auth.token !== null,
         loggedInUsername: state.auth.username,
-        isPostDeleted: state.post.postDeleted
+        isPostDeleted: state.post.postDeleted,
+        favFlag: state.post.favFlag
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onFetchFullPost: (postId, username, token) => dispatch(actions.fetchFullPost(postId, username, token)),
-        onDeletePost: (postId, author, token) => dispatch(actions.deletePost(postId, author, token))
+        onDeletePost: (postId, author, token) => dispatch(actions.deletePost(postId, author, token)),
+        onFavPost: (token, loggedInUsername, postId, isFav) => dispatch(actions.favPosts(token, loggedInUsername, postId, isFav)),
+        onIsFavPost: (token, loggedInUsername, postId) => dispatch(actions.isFavPost(token, loggedInUsername, postId))
     }
 }
 

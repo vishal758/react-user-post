@@ -32,7 +32,6 @@ export const submitPost = (username, postData, token) => {
         axios.post('/users/' + username + '/posts', postData, {headers})
         // axios.post('https://burger-react-app-50038.firebaseio.com/post.json', post)
         .then(response => {
-            console.log('submit response: ', response.data)
             dispatch(submitPostSuccess(response.data.resourceId, postData))
         })
         .catch(error => {
@@ -153,7 +152,6 @@ export const fetchParticularUserPosts = (username, token) => {
         let headers = {
             'Authorization': 'Bearer ' + token
         }
-        console.log(headers)
         axios.get('/users/' + username + '/posts', {headers})
             .then(response => {
                 dispatch(fetchParticularUserPostsSucess(response.data))
@@ -193,12 +191,9 @@ export const editPost = (username, postId, editData, token) => {
         axios.put('/users/' + username + '/posts/' + postId, editData, {headers})
             .then(response => {
                 dispatch(editPostSuccess())
-                // console.log("successful edit")
-                // console.log(response.data)
             })
             .catch(err => {
                 dispatch(editPostFail(err))
-                // console.log(err)
             })
     }
 }
@@ -228,7 +223,6 @@ export const deletePost = (postId, username, token) => {
         let headers = {
             'Authorization': 'Bearer ' + token
         }
-        console.log("delete post action", headers)
         axios.delete("/users/" + username + "/posts/" + postId, {headers})
             .then(response => {
                 dispatch(deletePostSuccess())
@@ -236,5 +230,83 @@ export const deletePost = (postId, username, token) => {
             .catch(err => {
                 dispatch(deletePostFail(err))
             })
+    }
+}
+
+export const favPostFail = (err) => {
+    return {
+        type: actionTypes.FAV_POSTS_FAIL,
+        err: err
+    }
+}
+
+export const favPostStart = () => {
+    return {
+        type: actionTypes.FAV_POSTS_START
+    }
+}
+
+export const favPostsSuccess = (isFavFlag) => {
+    return {
+        type: actionTypes.FAV_POSTS_SUCCESS,
+        fav: isFavFlag 
+    }
+}
+
+export const favPosts = (token, username, postId, isFav) => {
+    return dispatch => {
+        dispatch(favPostStart())
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        const params = new URLSearchParams({
+            action: isFav ? 'remove' : 'add'
+          }).toString();
+        axios.post('/users/' + username + '/favPosts/' + postId + '?' + params, {}, {headers})
+        .then(response => {
+            dispatch(favPostsSuccess(!isFav))
+        })
+        .catch(err => {
+            dispatch(favPostFail(err))
+        })
+    }
+}
+
+export const isFavPostFail = (err) => {
+    return {
+        type: actionTypes.IS_FAV_POST_FAIL,
+        err: err
+    }
+}
+
+export const isFavPostStart = () => {
+    return {
+        type: actionTypes.IS_FAV_POST_START
+    }
+}
+
+export const isFavPostSuccess = (isFavFlag) => {
+    return {
+        type: actionTypes.IS_FAV_POST_SUCCESS, 
+        isFav: isFavFlag
+    }
+}
+
+export const isFavPost = (token, username, postId) => {
+    return dispatch => {
+        dispatch(isFavPostStart())
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        const params = new URLSearchParams({
+            postId: postId
+          }).toString();
+        axios.get('/users/' + username + '/isFavPost?' + params, {headers})
+        .then(response => {
+            dispatch(isFavPostSuccess(response.data.isFavPost))
+        })
+        .catch(err => {
+            dispatch(isFavPostFail(err))
+        })
     }
 }

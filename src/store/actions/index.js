@@ -4,7 +4,9 @@ export {
     fetchFullPost,
     editPost,
     deletePost,
-    fetchParticularUserPosts
+    fetchParticularUserPosts,
+    favPosts,
+    isFavPost
 } from './post'
 
 export {

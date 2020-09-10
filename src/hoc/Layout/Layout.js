@@ -21,7 +21,6 @@ class Layout extends Component {
     }
 
     render() {
-        console.log("loggeinuser: ", this.props.loggedInUser)
         const logUser = this.props.loggedInUser
         return (
             <Aux>
