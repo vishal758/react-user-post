@@ -22,7 +22,8 @@ const SideDrawer = (props) => {
                 <nav>
                     <NavigationItems
                          loggedInUser = {props.loggedUser}
-                         isAuthenticated = {props.isAuth} />
+                         isAuthenticated = {props.isAuth} 
+                         inSideDrawerOnly = {true}/>
                 </nav>
             </div>
 

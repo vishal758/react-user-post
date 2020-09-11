@@ -310,3 +310,40 @@ export const isFavPost = (token, username, postId) => {
         })
     }
 }
+
+
+export const fetchFavPostsFail = (err) => {
+    return {
+        type: actionTypes.FETCH_FAV_POSTS_FAIL,
+        err: err
+    }
+}
+
+export const fetchFavPostsStart = () => {
+    return {
+        type: actionTypes.FETCH_FAV_POSTS_START
+    }
+}
+
+export const fetchFavPostsSuccess = (posts) => {
+    return {
+        type: actionTypes.FETCH_FAV_POSTS_SUCCESS, 
+        userPosts: posts
+    }
+}
+
+export const fetchFavPosts = (username, token) => {
+    return dispatch => {
+        dispatch(fetchFavPostsStart())
+        let headers = {
+            'Authorization': 'Bearer ' + token
+        }
+        axios.get('/users/' + username + '/favPosts', {headers})
+            .then(response => {
+                dispatch(fetchFavPostsSuccess(response.data))
+            })
+            .catch(error => {
+                dispatch(fetchFavPostsFail(error))                
+            })
+    }
+}

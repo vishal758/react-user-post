@@ -11,7 +11,7 @@ import EditPost from '../NewPost/EditPost/EditPost'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
 import ParticularUserPosts from '../Posts/ParticularUserPosts/ParticularUserPosts'
-
+import FavPosts from '../Posts/FavPosts/FavPosts'
 class UserPost extends Component {
     componentDidMount() {
         this.props.onTryAutoSignUp()
@@ -26,6 +26,7 @@ class UserPost extends Component {
                     <Route path="/logout" component = {Logout} />
                     <Route path="/allPosts" exact component={Posts} />
                     <Route path="/newPost" component = {NewPost}/>
+                    <Route path="/users/:username/favPosts" component = {FavPosts}/>
                     <Route path="/users/:username/posts/:id/edit" component = {EditPost} />
                     <Route path="/users/:username/posts/:id" component = {FullPost} />
                     <Route path="/users/:username/posts" component = {ParticularUserPosts}/>

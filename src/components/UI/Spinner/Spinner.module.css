@@ -7,7 +7,7 @@
   color: #13baea;
   font-size: 11px;
   text-indent: -99999em;
-  margin: 55px auto;
+  margin: 30% auto;
   position: relative;
   width: 10em;
   height: 10em;
@@ -63,5 +63,12 @@
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+
+@media(max-width: 500px) {
+  .Loader {
+    margin: 50% auto;
   }
 }

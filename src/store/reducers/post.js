@@ -91,6 +91,17 @@ const reducer = (state = initialState, action) => {
             return updateObject(state, {loading: false, error: action.err})
         case actionTypes.IS_FAV_POST_SUCCESS:
             return updateObject(state, {loading: false, error: null, favFlag: action.isFav})
+        case actionTypes.FETCH_FAV_POSTS_START:
+            return updateObject(state, {loading: true})
+        case actionTypes.FETCH_FAV_POSTS_FAIL:
+            return updateObject(state, {loading: false, error: action.error})
+        case actionTypes.FETCH_FAV_POSTS_SUCCESS:
+            return updateObject(state, {
+                loading: false,
+                error: null,
+                userPosts: action.userPosts
+            })
+        
         default:
             return state
     }

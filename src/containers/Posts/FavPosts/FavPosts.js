@@ -3,16 +3,15 @@ import { connect } from "react-redux";
 import * as actions from '../../../store/actions/index'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import Post from '../../../components/Post/Post'
-import classes from './ParticularUserPosts.module.css'
+import classes from './FavPosts.module.css'
 import Aux from '../../../hoc/Aux/Aux'
 import ModalAction from '../../NewPost/ModalAction/ModalAction'
 import Modal from '../../../components/UI/Modal/Modal'
 
-class ParticularUserPosts extends Component {
+class FavPosts extends Component {
 
     componentDidMount() {
-        // console.log("[ParticularUserPosts]", this.props.token)
-        this.props.onFetchParticularUserPosts(this.props.match.params.username, this.props.token)
+        this.props.onFetchFavPosts(this.props.loggedInUser, this.props.token)
     }
     postSelectedHandler = (id, username) => {
         if(this.props.isAuth) {
@@ -26,7 +25,7 @@ class ParticularUserPosts extends Component {
         this.props.history.push('/allPosts')
     }
     render() {
-        let posts = <p style={{textAlign: 'center'}}>No Posts from this user.</p>
+        let posts = <p style={{textAlign: 'center'}}>No Favourite Posts from this user.</p>
         if(this.props.loading)
             posts = <Spinner />
         if(Array.isArray(this.props.posts) && this.props.posts) {
@@ -51,7 +50,7 @@ class ParticularUserPosts extends Component {
         if(!Array.isArray(this.props.posts)) {
                 show = true
                 showModal = <ModalAction 
-                    message = "No Post from this user."
+                    message = "No Favourite Post from this user."
                     actionCancelled={this.cancelHandler}
                     mess = "CONTINUE"
                     actionConfirmed={this.cancelHandler} />
@@ -72,6 +71,7 @@ class ParticularUserPosts extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.post.loading,
+        loggedInUser: state.auth.username,
         token: state.auth.token,
         posts: state.post.userPosts,
         isAuth: state.auth.token !== null
@@ -80,8 +80,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchParticularUserPosts: (username, token) => dispatch(actions.fetchParticularUserPosts(username, token))
+        onFetchFavPosts: (username, token) => dispatch(actions.fetchFavPosts(username, token))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ParticularUserPosts)
+export default connect(mapStateToProps, mapDispatchToProps)(FavPosts)

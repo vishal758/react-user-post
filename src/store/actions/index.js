@@ -6,7 +6,8 @@ export {
     deletePost,
     fetchParticularUserPosts,
     favPosts,
-    isFavPost
+    isFavPost,
+    fetchFavPosts
 } from './post'
 
 export {

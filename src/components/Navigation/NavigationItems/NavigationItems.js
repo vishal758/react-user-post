@@ -22,6 +22,11 @@ const NavigationItems = props => {
                     : null
             }
             {
+                props.isAuthenticated && props.inSideDrawerOnly 
+                    ? <NavigationItem link={'/users/' + props.loggedInUser + '/favPosts'}>Fav Posts</NavigationItem>
+                    : null
+            }
+            {
                 !props.isAuthenticated
                     ? <NavigationItem link="/signin"> SignIn </NavigationItem>
                     : <NavigationItem link="/logout"> Logout </NavigationItem>

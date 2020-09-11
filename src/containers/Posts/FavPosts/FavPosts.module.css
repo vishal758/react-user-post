@@ -1,0 +1,13 @@
+.Posts {
+    margin: 80px auto;
+    /* background: #f1f1f1; */
+    box-sizing: border-box;
+    width: 80%;
+
+}
+
+@media(max-width: 550px) {
+    .Posts {
+        width: 100%;
+    }
+}
