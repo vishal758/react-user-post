@@ -35,6 +35,7 @@ class Posts extends Component {
         if(this.props.loading)
             posts = <Spinner />
         if(this.props.posts) {
+            console.log(this.props.posts)
             posts = this.props.posts.map(
                 post => {
                     return (
@@ -45,6 +46,7 @@ class Posts extends Component {
                             author = {post.author}
                             desc = {post.description}
                             lastModifiedDate = {post.lastModifiedDate}
+                            imageUrl = {post.imageUrl}
                             clicked = {() => this.postSelectedHandler(post.id, post.author)}
                             />
                         // </Link>

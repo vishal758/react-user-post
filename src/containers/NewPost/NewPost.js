@@ -28,6 +28,19 @@ class NewPost extends Component {
                 valid: false,
                 touched: false
             },
+            imageUrl: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Enter Image Url'
+                },
+                value: '',
+                validation: {
+                    required: false
+                },
+                valid: false,
+                touched: false
+            },
             desc: {
                 elementType: 'textarea',
                 elementConfig: {
@@ -40,7 +53,7 @@ class NewPost extends Component {
                 },
                 valid: false,
                 touched: false
-            },
+            }
         },
         formIsValid: false
     }

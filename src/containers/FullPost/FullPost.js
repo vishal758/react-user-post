@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import classes from './FullPost.module.css'
 import Aux from '../../hoc/Aux/Aux'
-import img from '../../assets/images/img1.jpg'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import * as actions from '../../store/actions/index'
 import { connect } from 'react-redux'
@@ -81,7 +80,7 @@ class FullPost extends Component {
                     <article className={classes.Container}>
                         <div className={classes.FullPost}>
                             <div className={classes.Meta}>
-                            <div className={classes.Photo} style={{backgroundImage: "url(" + img +")"}}></div>
+                            <div className={classes.Photo} style={{backgroundImage: "url(" + this.props.loadedPost?.imageUrl +")"}}></div>
                             </div>
                             <div>
                                 <div className={classes.Title}>

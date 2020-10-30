@@ -44,6 +44,19 @@ class EditPost extends Component {
                 valid: false,
                 touched: false
             },
+            imageUrl: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Enter Description'
+                },
+                value: '',
+                validation: {
+                    required: false
+                },
+                valid: false,
+                touched: false
+            },
             desc: {
                 elementType: 'textarea',
                 elementConfig: {
@@ -56,7 +69,7 @@ class EditPost extends Component {
                 },
                 valid: false,
                 touched: false
-            },
+            }
         },
         formIsValid: false
     }

@@ -77,7 +77,8 @@ export const fetchPosts = () => {
                         description: post.desc,
                         author: post.author,
                         lastModifiedDate: post.lastModifiedDate,
-                        userId: post.userId
+                        userId: post.userId,
+                        imageUrl: post.imageUrl
                     }
                 }
             )
