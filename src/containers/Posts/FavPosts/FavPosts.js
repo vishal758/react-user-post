@@ -39,6 +39,7 @@ class FavPosts extends Component {
                             author = {post.author}
                             desc = {post.desc}
                             lastModifiedDate = {post.lastModifiedDate}
+                            imageUrl = {post.imageUrl}
                             clicked = {() => this.postSelectedHandler(post.id, post.author)}
                             />
                         // </Link>
